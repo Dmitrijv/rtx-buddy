@@ -25,9 +25,8 @@
     <tr>
       <!-- <th scope="col">Status</th> -->
       <th scope="col">Price</th>
-      <th scope="col">Card</th>
+      <th scope="col">Model</th>
       <th scope="col" class="d-none d-sm-table-cell">Restock</th>
-      <th scope="col" class="d-none d-sm-table-cell">Days</th>
     </tr>
   </thead>
   <tbody class="inet-gpu-tbody">
@@ -39,8 +38,7 @@
           <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(price)} kr</span>
         </td>
         <td><a href={productUrl}>{name}</a></td>
-        <td class="d-none d-sm-table-cell">{restockDate}</td>
-        <td class="d-none d-sm-table-cell">{restockDays ? restockDays : ""}</td>
+        <td class="d-none d-sm-table-cell">{restockDate}{restockDays ? ` - ${restockDays} days` : ""}</td>
       </tr>
     {/each}
   </tbody>
@@ -48,7 +46,7 @@
 
 <style>
   span {
-    padding: 2px 3px;
+    padding: 2px 4px;
   }
 
   .in-stock {
