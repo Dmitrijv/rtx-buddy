@@ -170,7 +170,7 @@ function getInetCardStatus($loc, $stock) {
 function compareNodes($a, $b) {
   $aStatus = getPriskaktCardStatus($a['stock']);
   $bStatus = getPriskaktCardStatus($b['stock']);
-  if ($aStatus == $bStatus) {
+  if ($aStatus == $bStatus || ($aStatus + $bStatus) <= 2) {
     $aPrice = $a['price']['inclShipping'] !== null ? $a['price']['inclShipping'] : $a['price']['exclShipping'];
     $bPrice = $b['price']['inclShipping'] !== null ? $b['price']['inclShipping'] : $b['price']['exclShipping'];
     return $aPrice > $bPrice ? 1 : -1;
