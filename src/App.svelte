@@ -8,7 +8,8 @@
 
   async function loadLatestData() {
     isLoading = true;
-    await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+    //await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+    await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
