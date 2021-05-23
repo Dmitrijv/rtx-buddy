@@ -161,7 +161,8 @@ function getJsonFromApi($endpoint, $body = null) {
 
 function getInetCardStock($cardJson) {
   $stock = 0;
-  foreach($cardJson['qty'] as $store) { $stock = $stock + $store['qty']; }  
+  foreach($cardJson['qty'] as $store) { $stock = $stock + $store['qty']; }
+  return $stock;
 }
 
 function getInetCardStatus($loc, $stock) {
