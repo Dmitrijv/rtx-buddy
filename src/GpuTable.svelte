@@ -23,7 +23,7 @@
 <table class="table table-sm table-hover">
   <thead>
     <tr>
-      <th scope="col">Price</th>
+      <th scope="col">SEK</th>
       <th scope="col">Model</th>
       <th scope="col" class="d-none d-sm-table-cell">Restock</th>
       <th scope="col" class="d-none d-sm-table-cell">Days</th>
@@ -32,10 +32,8 @@
   <tbody class="inet-gpu-tbody">
     {#each cardList as { id, url, price, name, qty, status, restockDate, restockDays }, i}
       <tr>
-        <!-- <td> <span class={getClassByStatus(status)}> {getStatusLabel(status)} </span></td> -->
-        <!-- class="d-none d-sm-table-cell" -->
         <td>
-          <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))} kr</span>
+          <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))}</span>
         </td>
         <td><a href={url}>{name}</a></td>
         <td class="d-none d-sm-table-cell">{restockDate}</td>
