@@ -121,7 +121,7 @@ function compareCards($a, $b) {
     if ($a['status'] == ProductStatus::Incoming) { 
       if (strlen($a['restockDate']) < 10) { return 1; }
       if (strlen($b['restockDate']) < 10) { return -1; }
-      if ($a['restockDays'] > $b['restockDays']) return $a['price'] > $b['price'] ? 1 : -1;
+      if ($a['restockDays'] == $b['restockDays']) return $a['price'] > $b['price'] ? 1 : -1;
       return $a['restockDays'] > $b['restockDays'] ? 1 : -1;
     }
     return $a['price'] > $b['price'] ? 1 : -1;
