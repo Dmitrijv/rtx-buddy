@@ -1,8 +1,7 @@
 <script>
-  import GpuTable from "./GpuTable.svelte";
-
   import { onMount } from "svelte";
   import BarSpinner from "./BarSpinner.svelte";
+  import GpuTable from "./GpuTable.svelte";
 
   export let cardList = [];
   export let loading = true;
