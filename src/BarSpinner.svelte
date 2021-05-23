@@ -12,6 +12,7 @@
     height: 30px;
     text-align: center;
     font-size: 10px;
+    user-select: none;
   }
 
   .bar-spinner > div {
