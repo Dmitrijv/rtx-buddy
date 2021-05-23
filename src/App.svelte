@@ -12,6 +12,7 @@
     if (refreshing) return;
     refreshing = isRefresh;
     // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+    console.log("New network request.");
     await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
