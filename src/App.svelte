@@ -35,7 +35,7 @@
   <!-- Table -->
   <div class="table-container">
     {#if isLoading}
-      <BarSpinner />
+      <BarSpinner bars={5} />
     {:else}
       <GpuTable {cardList} />
     {/if}

@@ -1,14 +1,29 @@
+<script>
+  export let bars = 3;
+</script>
+
 <div class="bar-spinner">
-  <div class="rect1" />
-  <div class="rect2" />
-  <div class="rect3" />
-  <div class="rect4" />
+  {#if bars >= 1}
+    <div class="rect1" />
+  {/if}
+  {#if bars >= 2}
+    <div class="rect2" />
+  {/if}
+  {#if bars >= 3}
+    <div class="rect3" />
+  {/if}
+  {#if bars >= 4}
+    <div class="rect4" />
+  {/if}
+  {#if bars >= 5}
+    <div class="rect5" />
+  {/if}
 </div>
 
 <style>
   .bar-spinner {
     margin: 6px auto;
-    width: 50px;
+    width: 60px;
     height: 30px;
     text-align: center;
     font-size: 10px;
@@ -38,6 +53,11 @@
   .bar-spinner .rect4 {
     -webkit-animation-delay: -0.9s;
     animation-delay: -0.9s;
+  }
+
+  .bar-spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
   }
 
   @-webkit-keyframes sk-stretchdelay {
