@@ -1,17 +1,18 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import BarSpinner from "./BarSpinner.svelte";
   import GpuTable from "./GpuTable.svelte";
 
   export let cardList = [];
+  export let timestamp = "loading";
   export let loading = true;
   export let refreshing = false;
 
   async function updateCardList(isRefresh = false) {
     if (refreshing) return;
     refreshing = isRefresh;
-    // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
     console.log("New network request.");
+    // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
     await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
@@ -19,11 +20,19 @@
         loading = false;
         refreshing = false;
       });
+    timestamp = new Date().toLocaleTimeString("en-US", { hour12: false, hour: "numeric", minute: "numeric" });
   }
+
+  let interval;
 
   onMount(async () => {
     await updateCardList();
+    interval = setInterval(async () => {
+      await updateCardList(true);
+    }, 30000);
   });
+
+  onDestroy(() => clearInterval(interval));
 </script>
 
 <main>
@@ -31,18 +40,13 @@
   <div class="nav-container">
     <div class="nav">
       <h1>RTX Buddy</h1>
-      <button
-        type="button"
-        class="btn btn-light shadow-none"
-        disabled={refreshing || loading}
-        on:click={() => updateCardList(true)}
-      >
+      <div class="btn btn-light shadow-none">
         {#if refreshing}
-          <BarSpinner bars={4} />
+          <BarSpinner bars={5} />
         {:else}
-          Update
+          {timestamp}
         {/if}
-      </button>
+      </div>
     </div>
   </div>
   <!-- Table -->
@@ -76,12 +80,13 @@
     margin: 0 auto;
   }
 
-  button.btn-light {
+  .btn-light {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 86px;
     height: 34px;
+    cursor: default;
   }
 
   .nav h1 {
