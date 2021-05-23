@@ -34,9 +34,8 @@
       <button
         type="button"
         class="btn btn-light shadow-none"
-        on:click={() => {
-          if (!loading) updateCardList(true);
-        }}
+        disabled={refreshing || loading}
+        on:click={() => updateCardList(true)}
       >
         {#if refreshing}
           <BarSpinner bars={4} />
