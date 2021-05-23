@@ -9,7 +9,7 @@
   export let refreshing = false;
 
   async function updateCardList(isRefresh = false) {
-    if (loading || refreshing) return;
+    if (refreshing) return;
     refreshing = isRefresh;
     // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
     await fetch("php/cards.php")
@@ -31,7 +31,13 @@
   <div class="nav-container">
     <div class="nav">
       <h1>RTX Buddy</h1>
-      <button type="button" class="btn btn-light shadow-none" on:click={() => updateCardList(true)}>
+      <button
+        type="button"
+        class="btn btn-light shadow-none"
+        on:click={() => {
+          if (!loading) updateCardList(true);
+        }}
+      >
         {#if refreshing}
           <BarSpinner bars={4} />
         {:else}

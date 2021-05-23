@@ -1,9 +1,10 @@
 <?php
 
 // header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: http://dmitrijv.se');
 header('Access-Control-Allow-Methods: GET');
-header("Access-Control-Allow-Headers: X-Requested-With");
 header('Content-Type: application/json');
+// header("Access-Control-Allow-Headers: X-Requested-With");
 
 abstract class ProductStatus {
   const KnownStock = 0;
