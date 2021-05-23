@@ -172,14 +172,12 @@ function getInetCardStock($cardJson) {
 }
 
 function getInetCardStatus($loc, $stock) {
-  $status = ProductStatus::SoldOut;
-  
   if ($stock > 0) { return ProductStatus::KnownStock; }
   else if ( array_key_exists('restockDate', $loc) ) { return ProductStatus::Incoming; }
   else if ( array_key_exists('isDelayed', $loc) && $loc['isDelayed'] == true) { return ProductStatus::Delayed; }
   else if ( $stock == 0 && array_key_exists('restockDays', $loc) ) { return ProductStatus::Incoming; }
   else if ( array_key_exists('blocked', $loc) && $loc['blocked'] == true) { return ProductStatus::Blocked; }
-  return $status;
+  return ProductStatus::SoldOut;
 }
 
 
@@ -205,15 +203,13 @@ function getPriskaktCardStatus($stock) {
   $string = $stock['status'];
   $text = $stock['statusText'];
 
-  $status = ProductStatus::Na;
-
   if ($string == 'in_stock') {
     if (str_contains($text, "st")) { return ProductStatus::KnownStock; }
     return ProductStatus::InStock; 
   }
   else if ($string == 'incoming' || str_contains($text, 'Kommer')) { return ProductStatus::Incoming; }
   else if ($string == 'not_in_stock') { return ProductStatus::SoldOut; }
-  return $status;
+  return ProductStatus::Na;
 }
 
 function getDaysToDate($target) {
