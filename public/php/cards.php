@@ -103,11 +103,15 @@ foreach($prisjaktJson as $key=>$json) {
   $restockDate = $card['status'] == ProductStatus::Incoming ? $bestNode['stock']['statusText'] : '';
   $restockDate = str_ireplace("Kommer ", "", $restockDate);
   $restockDate = str_ireplace("T00:00:00", "", $restockDate);
-  $card['restockDate'] = strtotime($restockDate) > strtotime('now') ? $restockDate : '';
-  $card['restockDays'] = strlen($card['restockDate']) > 0 ? getDaysToDate($restockDate) : '';
+  $card['restockDate'] = $restockDate;
 
-  // if (strlen($restockDate) > 0 && strtotime($restockDate) > strtotime('now')) {
-  // }
+  // do a sanity check on restock date
+  if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) < strtotime('now') ) {
+    $card['status'] = ProductStatus::Na;
+    $card['restockDays'] = '';
+  } else {
+    $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
+  }
 
   // $card['store']['name'] = $bestNode['store']['name'];
   // $card['store']['image'] = "https://pricespy-75b8.kxcdn.com/g/rfe/logos/logo_se_v2_light.svg";
@@ -216,7 +220,6 @@ function getDaysToDate($target) {
   $now = date("Y/m/d");
   $start = new DateTime($now);
   $end = new DateTime($target);
-  if ($start > $end) {return 999;}
   return $end->diff($start)->format("%a");
 }
 
