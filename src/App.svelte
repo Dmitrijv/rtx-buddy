@@ -11,8 +11,8 @@
   async function updateCardList(isRefresh = false) {
     if (loading || refreshing) return;
     refreshing = isRefresh;
-    await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
-      // await fetch("php/cards.php")
+    // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+    await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
