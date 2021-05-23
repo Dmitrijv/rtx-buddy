@@ -43,6 +43,13 @@
 </main>
 
 <style>
+  .nav-container {
+    background-color: white;
+    margin-bottom: 30px;
+    box-shadow: 0 -0.4rem 0.4rem 0.2rem rgb(0 0 0 / 50%);
+    padding: 0.25rem;
+  }
+
   .nav {
     display: flex;
     justify-content: space-between;
@@ -65,12 +72,6 @@
     padding: 0;
     margin: 0;
     text-align: left;
-  }
-
-  .nav-container {
-    background-color: white;
-    margin-bottom: 30px;
-    box-shadow: 0 -0.4rem 0.4rem 0.2rem rgb(0 0 0 / 50%);
   }
 
   .table-container {
