@@ -8,8 +8,8 @@
 
   async function loadLatestData() {
     isLoading = true;
-    //await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
-    await fetch("php/cards.php")
+    await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+      // await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
@@ -24,12 +24,14 @@
 </script>
 
 <main>
+  <!-- Header -->
   <div class="nav-container">
     <div class="nav">
-      <h1>RTX 3080 Buddy</h1>
+      <h1>RTX Buddy</h1>
       <button type="button" class="btn btn-light shadow-none" on:click={loadLatestData}>Update</button>
     </div>
   </div>
+  <!-- Table -->
   <div class="table-container">
     {#if isLoading}
       <!-- Spinner -->
@@ -48,10 +50,11 @@
   .nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     width: 100%;
-    max-width: 700px;
-    padding: 10px;
+    max-width: 650px;
+    padding: 4px;
     margin: 0 auto;
   }
 
@@ -76,11 +79,11 @@
 
   .table-container {
     width: 100%;
-    max-width: 700px;
+    max-width: 650px;
     box-shadow: rgba(149, 157, 165, 0.15) 0px 3px 6px 0px;
     background-color: white;
     margin: 10px auto;
-    padding: 10px;
+    padding: 4px;
     border-radius: 6px;
   }
 </style>
