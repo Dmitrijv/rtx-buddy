@@ -23,28 +23,34 @@
 <table class="table table-sm table-hover">
   <thead>
     <tr>
-      <!-- <th scope="col">Status</th> -->
       <th scope="col">Price</th>
       <th scope="col">Model</th>
       <th scope="col" class="d-none d-sm-table-cell">Restock</th>
+      <th scope="col" class="d-none d-sm-table-cell">Days</th>
     </tr>
   </thead>
   <tbody class="inet-gpu-tbody">
-    {#each cardList as { id, productUrl, price, name, qty, status, restockDate, restockDays }, i}
+    {#each cardList as { id, url, price, name, qty, status, restockDate, restockDays }, i}
       <tr>
         <!-- <td> <span class={getClassByStatus(status)}> {getStatusLabel(status)} </span></td> -->
         <!-- class="d-none d-sm-table-cell" -->
         <td>
-          <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(price)} kr</span>
+          <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))} kr</span>
         </td>
-        <td><a href={productUrl}>{name}</a></td>
-        <td class="d-none d-sm-table-cell">{restockDate}{restockDays ? ` - ${restockDays} days` : ""}</td>
+        <td><a href={url}>{name}</a></td>
+        <td class="d-none d-sm-table-cell">{restockDate}</td>
+        <td class="d-none d-sm-table-cell">{restockDays}</td>
       </tr>
     {/each}
   </tbody>
 </table>
 
 <style>
+  .table-hover > tbody > tr:hover {
+    --bs-table-accent-bg: none !important;
+    background-color: whitesmoke !important;
+  }
+
   span {
     padding: 2px 4px;
   }
