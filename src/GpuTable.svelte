@@ -73,12 +73,7 @@
     background-color: rgb(164, 68, 65);
   }
 
-  .store-logo {
-    max-height: 38px;
-    width: 100px;
-    margin-top: 20px;
-    background-color: rgb(0, 173, 219);
-    padding: 6px;
-    border-radius: 6px;
+  a {
+    text-decoration: none;
   }
 </style>
