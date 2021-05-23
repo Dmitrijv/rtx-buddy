@@ -1,5 +1,8 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Methods: GET');
+// header("Access-Control-Allow-Headers: X-Requested-With");
 header('Content-Type: application/json');
 
 abstract class ProductStatus {
@@ -33,11 +36,11 @@ $cards = [];
 
 $inetJson = getJsonFromApi('https://www.inet.se/api/products', $inetCardIds);
 foreach($inetJson as $key=>$json) {
-  $id = $json['id'];
-  $loc = $json['qty']['00'];
 
-  $card['id'] = $id;
-  $card['productUrl'] = "https://www.inet.se/produkt/". $id ."/". $json['urlName'];
+  $id = $json['id'];
+  // $card['id'] = $id;
+
+  $card['url'] = "https://www.inet.se/produkt/". $id ."/". $json['urlName'];
   $card['price'] = $json['price']['price'];
   
   $name = $json['name'];
@@ -45,17 +48,18 @@ foreach($inetJson as $key=>$json) {
   $name = str_ireplace("  ", " ", $name);
   $card['name'] = $name;
   
-  $card['qty'] = getInetCardStock($json);
-  $card['status'] = getInetCardStatus($json['qty']['00'], $card['qty']);
+  $qty = getInetCardStock($json);
+  //$card['qty'] = $qty;
+  $card['status'] = getInetCardStatus($json['qty']['00'], $qty);
 
-  $restockDate = array_key_exists('restockDate', $loc) ? $loc['restockDate'] : null;
+  $loc = $json['qty']['00'];
+  $restockDate = array_key_exists('restockDate', $loc) ? $loc['restockDate'] : '';
   $restockDate = str_ireplace("T00:00:00", "", $restockDate);
-  $card['restockDate'] = $restockDate;
+  $card['restockDate'] = strtotime($restockDate) > strtotime('now') ? $restockDate : '';
+  $card['restockDays'] = array_key_exists('restockDays', $loc) ? $loc['restockDays'] : '';
 
-  $card['restockDays'] = array_key_exists('restockDays', $loc) ? $loc['restockDays'] : null;
-
-  $card['store']['name'] = "Inet";
-  $card['store']['image'] = "https://inetimg2.se/img/logo/inet-logo-rgb-pos-new.svg";
+  // $card['store']['name'] = "Inet";
+  // $card['store']['image'] = "https://inetimg2.se/img/logo/inet-logo-rgb-pos-new.svg";
 
   $cards[$id] = $card;
 }
@@ -69,7 +73,7 @@ $prisjaktJson = $prisjaktRes['data']['productCollection']['slices'][5]['products
 foreach($prisjaktJson as $key=>$json) {
   $id = $json['id'];
 
-  $card['id'] = $id;
+  // $card['id'] = $id;
   
   $name = $json['name'];
   $name = str_ireplace("GeForce RTX 3080", "", $name);
@@ -82,7 +86,7 @@ foreach($prisjaktJson as $key=>$json) {
   $name = str_ireplace("  ", " ", $name);
   $card['name'] = $name;
   
-  $card['productUrl'] = "https://www.prisjakt.nu". $json['pathName'];
+  $card['url'] = "https://www.prisjakt.nu". $json['pathName'];
   
   $priceEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release=2021-05-19T09:22:26Z|87370e89&version=ded13a&main=product&variables={"id":'. $id .',"offset":0,"section":"main","marketCode":"se","personalizationExcludeCategories":[],"recommendationsContextId":"product-page","includeSecondary":false,"excludeTypes":["used_product","not_in_mint_condition","not_available_for_purchase"],"variants":null,"advized":true,"priceList":true,"userActions":true,"badges":true,"media":true,"campaign":true,"relatedProducts":true,"campaignDeals":true,"priceHistory":true,"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
   $res = getJsonFromApi($priceEndpoint);
@@ -91,19 +95,21 @@ foreach($prisjaktJson as $key=>$json) {
   $card['price'] = $bestNode['price']['inclShipping'] !== null ? $bestNode['price']['inclShipping'] : $bestNode['price']['exclShipping'];
   $card['status'] = getPriskaktCardStatus($bestNode['stock']);
 
-  $qty = $card['status'] == ProductStatus::KnownStock ? $bestNode['stock']['statusText'] : '0';
-  $qty = str_ireplace(" st i lager", "", $qty);
-  $card['qty'] = (int)$qty;
+  // $qty = $card['status'] == ProductStatus::KnownStock ? $bestNode['stock']['statusText'] : '0';
+  // $qty = str_ireplace(" st i lager", "", $qty);
+  // $card['qty'] = (int)$qty;
 
   $restockDate = $card['status'] == ProductStatus::Incoming ? $bestNode['stock']['statusText'] : '';
   $restockDate = str_ireplace("Kommer ", "", $restockDate);
   $restockDate = str_ireplace("T00:00:00", "", $restockDate);
-  $card['restockDate'] = $restockDate;
+  $card['restockDate'] = strtotime($restockDate) > strtotime('now') ? $restockDate : '';
+  $card['restockDays'] = strlen($card['restockDate']) > 0 ? getDaysToDate($restockDate) : '';
 
-  $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
+  // if (strlen($restockDate) > 0 && strtotime($restockDate) > strtotime('now')) {
+  // }
 
-  $card['store']['name'] = $bestNode['store']['name'];
-  $card['store']['image'] = "https://pricespy-75b8.kxcdn.com/g/rfe/logos/logo_se_v2_light.svg";
+  // $card['store']['name'] = $bestNode['store']['name'];
+  // $card['store']['image'] = "https://pricespy-75b8.kxcdn.com/g/rfe/logos/logo_se_v2_light.svg";
 
   $cards[$id] = $card;
 }
@@ -111,7 +117,11 @@ foreach($prisjaktJson as $key=>$json) {
 
 function compareCards($a, $b) {
   if ($a['status'] == $b['status']) {
-    if ($a['status'] == ProductStatus::Incoming) { return $a['restockDays'] > $b['restockDays'] ? 1 : -1; }
+    if ($a['status'] == ProductStatus::Incoming) { 
+      if (strlen($a['restockDate']) < 10) { return 1; }
+      if (strlen($b['restockDate']) < 10) { return -1; }
+      return $a['restockDays'] > $b['restockDays'] ? 1 : -1;
+    }
     return $a['price'] > $b['price'] ? 1 : -1;
   }
   return $a['status'] > $b['status'] ? 1 : -1;
