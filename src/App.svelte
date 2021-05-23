@@ -5,22 +5,24 @@
   import BarSpinner from "./BarSpinner.svelte";
 
   export let cardList = [];
-  export let isLoading = true;
+  export let loading = true;
+  export let refreshing = false;
 
-  async function loadLatestData() {
-    isLoading = true;
+  async function updateCardList(isRefresh = false) {
+    if (loading || refreshing) return;
+    refreshing = isRefresh;
     await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
       // await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
+        loading = false;
+        refreshing = false;
       });
-
-    isLoading = false;
   }
 
   onMount(async () => {
-    await loadLatestData();
+    await updateCardList();
   });
 </script>
 
@@ -29,13 +31,21 @@
   <div class="nav-container">
     <div class="nav">
       <h1>RTX Buddy</h1>
-      <button type="button" class="btn btn-light shadow-none" on:click={loadLatestData}>Update</button>
+      <button type="button" class="btn btn-light shadow-none" on:click={() => updateCardList(true)}>
+        {#if refreshing}
+          <BarSpinner bars={4} />
+        {:else}
+          Update
+        {/if}
+      </button>
     </div>
   </div>
   <!-- Table -->
   <div class="table-container">
-    {#if isLoading}
-      <BarSpinner bars={5} />
+    {#if loading}
+      <div class="table-spinner">
+        <BarSpinner bars={5} />
+      </div>
     {:else}
       <GpuTable {cardList} />
     {/if}
@@ -62,7 +72,11 @@
   }
 
   button.btn-light {
-    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 86px;
+    height: 34px;
   }
 
   .nav h1 {
@@ -72,6 +86,10 @@
     padding: 0;
     margin: 0;
     text-align: left;
+  }
+
+  .table-spinner {
+    padding: 8px;
   }
 
   .table-container {

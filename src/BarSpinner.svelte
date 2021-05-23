@@ -22,9 +22,9 @@
 
 <style>
   .bar-spinner {
-    margin: 6px auto;
+    margin: 0 auto;
     width: 60px;
-    height: 30px;
+    height: 20px;
     text-align: center;
     font-size: 10px;
     user-select: none;
