@@ -95,7 +95,7 @@
   }
 
   .table-spinner {
-    padding: 8px;
+    padding: 20px 0;
   }
 
   .table-container {
