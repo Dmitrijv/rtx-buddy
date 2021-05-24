@@ -20,7 +20,8 @@
         loading = false;
         refreshing = false;
       })
-      .catch(function () {
+      .catch((error) => {
+        console.error("Network request error:", error);
         cardList = [];
         loading = false;
         refreshing = false;
