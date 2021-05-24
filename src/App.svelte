@@ -19,6 +19,12 @@
         cardList = data;
         loading = false;
         refreshing = false;
+      })
+      .catch(function () {
+        cardList = [];
+        loading = false;
+        refreshing = false;
+        timestamp = "ERR";
       });
     timestamp = new Date().toLocaleTimeString("en-US", { hour12: false, hour: "numeric", minute: "numeric" });
   }
