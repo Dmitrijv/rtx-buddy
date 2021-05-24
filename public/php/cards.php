@@ -4,7 +4,7 @@
 header('Access-Control-Allow-Origin: http://dmitrijv.se');
 header('Access-Control-Allow-Methods: GET');
 header('Content-Type: application/json');
-// header("Access-Control-Allow-Headers: X-Requested-With");
+header("Access-Control-Allow-Headers: X-Requested-With");
 
 abstract class ProductStatus {
   const KnownStock = 0;
@@ -67,7 +67,7 @@ foreach($inetJson as $key=>$json) {
 // pp(json_encode($cards));
 
 
-$prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release=2021-05-19T09:22:26Z|87370e89&version=ded13a&main=productCollection&variables={"slug":"grafikkort","type":"c","query":{"url":null,"filters":[{"id":"5530","type":"term","property":"4104"},{"id":"36254","type":"term","property":"532"}],"aggregations":[],"offset":0},"productPropertyIds":["532","6716"],"productPropertyColumnIds":["532","6716"],"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
+$prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release=2021-05-24T07:59:46Z|8e719f63&version=f6d981&main=productCollection&variables={"slug":"grafikkort","type":"c","query":{"url":null,"filters":[{"id":"5530","type":"term","property":"4104"},{"id":"36254","type":"term","property":"532"}],"aggregations":[],"sort":"property.in_stock","offset":0},"productPropertyIds":["532","6716"],"productPropertyColumnIds":["532","6716"],"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
 $prisjaktRes = getJsonFromApi($prisjaktEndpoint);
 $prisjaktJson = $prisjaktRes['data']['productCollection']['slices'][5]['products'];
 
@@ -89,7 +89,7 @@ foreach($prisjaktJson as $key=>$json) {
   
   $card['url'] = "https://www.prisjakt.nu". $json['pathName'];
   
-  $priceEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release=2021-05-19T09:22:26Z|87370e89&version=ded13a&main=product&variables={"id":'. $id .',"offset":0,"section":"main","marketCode":"se","personalizationExcludeCategories":[],"recommendationsContextId":"product-page","includeSecondary":false,"excludeTypes":["used_product","not_in_mint_condition","not_available_for_purchase"],"variants":null,"advized":true,"priceList":true,"userActions":true,"badges":true,"media":true,"campaign":true,"relatedProducts":true,"campaignDeals":true,"priceHistory":true,"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
+  $priceEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release=2021-05-24T07:59:46Z|8e719f63&version=f6d981&main=product&variables={"id":'.$id.',"offset":0,"section":"main","marketCode":"se","personalizationExcludeCategories":[],"recommendationsContextId":"product-page","includeSecondary":false,"excludeTypes":["used_product","not_in_mint_condition","not_available_for_purchase"],"variants":null,"advized":true,"priceList":true,"userActions":true,"badges":true,"media":true,"campaign":true,"relatedProducts":true,"campaignDeals":true,"priceHistory":true,"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
   $res = getJsonFromApi($priceEndpoint);
   $bestNode = getBestPrisjaktPrice($res['data']['product']['prices']['nodes']);
 
