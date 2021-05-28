@@ -1,5 +1,7 @@
 <?php
 
+include_once('lib/simple_html_dom.php');
+
 // header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Origin: http://dmitrijv.se');
 header('Access-Control-Allow-Methods: GET');
@@ -66,10 +68,18 @@ foreach($inetJson as $key=>$json) {
 }
 // pp(json_encode($cards));
 
-$GQLRelease = '2021-05-26T07:13:49Z|e4ef2233';	// window.RELEASE = "2021-05-26T07:13:49Z|e4ef2233";
-$GQLVersion = '396442';							            // window.GRAPHQL_VERSION = "396442";
 
 
+// Fetch current GraphQL version from the landing page.
+$prisjaktHtml = file_get_html('https://www.prisjakt.nu/')->save();
+$match = preg_match('/window\.RELEASE = "(.+)";.+window\.GRAPHQL_VERSION = "(.+)";/mU', $prisjaktHtml, $matches);
+if ($match !== 1) { 
+  echo 'Could not fetch latest GraphQL version.';
+  die;
+}
+
+$GQLRelease = $matches[1];
+$GQLVersion = $matches[2];
 
 $prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRelease.'&version='.$GQLVersion.'&main=productCollection&variables={"slug":"grafikkort","type":"c","query":{"url":null,"filters":[{"id":"5530","type":"term","property":"4104"},{"id":"36254","type":"term","property":"532"}],"aggregations":[],"sort":"property.in_stock","offset":0},"productPropertyIds":["532","6716"],"productPropertyColumnIds":["532","6716"],"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
 $prisjaktRes = getJsonFromApi($prisjaktEndpoint);
