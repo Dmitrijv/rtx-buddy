@@ -121,7 +121,7 @@ foreach($prisjaktJson as $key=>$json) {
 
   // do a sanity check on restock date
   if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) < strtotime('now') ) {
-    $card['status'] = ProductStatus::Na;
+    $card['status'] = ProductStatus::Delayed;
     $card['restockDays'] = '';
   } else {
     $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
