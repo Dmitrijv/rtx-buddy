@@ -59,12 +59,19 @@ foreach($inetJson as $key=>$json) {
   $restockDate = array_key_exists('restockDate', $loc) ? $loc['restockDate'] : '';
   $restockDate = str_ireplace("T00:00:00", "", $restockDate);
   $card['restockDate'] = strtotime($restockDate) > strtotime('now') ? $restockDate : '';
-  $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
-  // $card['restockDays'] = array_key_exists('restockDays', $loc) ? $loc['restockDays'] : '';
+
+  // do a sanity check on restock date
+  if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) < strtotime('now') ) {
+    $card['status'] = ProductStatus::Delayed;
+    $card['restockDays'] = '';
+  } else { 
+    $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
+    // $card['restockDays'] = array_key_exists('restockDays', $loc) ? $loc['restockDays'] : '';
+  }
 
   // $card['store']['name'] = "Inet";
   // $card['store']['image'] = "https://inetimg2.se/img/logo/inet-logo-rgb-pos-new.svg";
-
+  
   $cards[$id] = $card;
 }
 // pp(json_encode($cards));
