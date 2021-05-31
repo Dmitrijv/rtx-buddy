@@ -86,6 +86,59 @@ $prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRel
 $prisjaktRes = getJsonFromApi($prisjaktEndpoint);
 $prisjaktJson = $prisjaktRes['data']['productCollection']['slices'][5]['products'];
 
+
+//create the array of cURL handles and add to a multi_curl
+$mh = curl_multi_init();
+foreach($prisjaktJson as $key=>$json) {
+  $id = $json['id'];
+  $url = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRelease.'&version='.$GQLVersion.'&main=product&variables={"id":'.$id.',"offset":0,"section":"main","marketCode":"se","personalizationExcludeCategories":[],"recommendationsContextId":"product-page","includeSecondary":false,"excludeTypes":["used_product","not_in_mint_condition","not_available_for_purchase"],"variants":null,"advized":true,"priceList":true,"userActions":true,"badges":true,"media":true,"campaign":true,"relatedProducts":true,"campaignDeals":true,"priceHistory":true,"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
+
+  $chs[$id] = curl_init();
+  curl_setopt($chs[$id], CURLOPT_URL, $url);
+  curl_setopt($chs[$id], CURLOPT_CUSTOMREQUEST, "GET");
+  curl_setopt($chs[$id], CURLOPT_RETURNTRANSFER, true); // Will return the response, if false it prints the response
+  curl_setopt($chs[$id], CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+  ));
+
+  curl_multi_add_handle($mh, $chs[$id]);
+}
+
+
+// run all requests together
+$running = null;
+do {
+  curl_multi_exec($mh, $running);
+} while ($running);
+
+
+// save the responses
+$prisjaktPriceNodeById = [];
+foreach(array_keys($chs) as $key) {
+    $response = curl_multi_getcontent($chs[$key]);
+    $response = json_decode($response, true);
+
+    if (empty($error)) {
+      $prisjaktPriceNodeById[$key] = $response['data']['product']['prices']['nodes'];
+    }
+    else {
+      // die;
+      echo "The request $key return a error: $error" . "</br>";
+    }
+
+    curl_multi_remove_handle($mh, $chs[$key]);
+}
+
+// close current handler
+curl_multi_close($mh);
+
+
+
+
+
+
+
+// build card list
 foreach($prisjaktJson as $key=>$json) {
   $id = $json['id'];
 
@@ -104,9 +157,7 @@ foreach($prisjaktJson as $key=>$json) {
   
   $card['url'] = "https://www.prisjakt.nu". $json['pathName'];
   
-  $priceEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRelease.'&version='.$GQLVersion.'&main=product&variables={"id":'.$id.',"offset":0,"section":"main","marketCode":"se","personalizationExcludeCategories":[],"recommendationsContextId":"product-page","includeSecondary":false,"excludeTypes":["used_product","not_in_mint_condition","not_available_for_purchase"],"variants":null,"advized":true,"priceList":true,"userActions":true,"badges":true,"media":true,"campaign":true,"relatedProducts":true,"campaignDeals":true,"priceHistory":true,"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
-  $res = getJsonFromApi($priceEndpoint);
-  $bestNode = getBestPrisjaktPrice($res['data']['product']['prices']['nodes']);
+  $bestNode = getBestPrisjaktPrice($prisjaktPriceNodeById[$id]);
 
   $card['price'] = $bestNode['price']['inclShipping'] !== null ? $bestNode['price']['inclShipping'] : $bestNode['price']['exclShipping'];
   $card['status'] = getPriskaktCardStatus($bestNode['stock']);
