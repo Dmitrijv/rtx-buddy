@@ -49,7 +49,7 @@
       <h1>RTX 3080</h1>
       <div class="btn btn-light shadow-none">
         {#if refreshing}
-          <BarSpinner bars={5} />
+          <BarSpinner bars={4} />
         {:else}
           {timestamp}
         {/if}
