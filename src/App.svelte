@@ -46,7 +46,7 @@
   <!-- Header -->
   <div class="nav-container">
     <div class="nav">
-      <h1>RTX 3080</h1>
+      <h1>RTX 3080 ({cardList.length})</h1>
       <div class="btn btn-light shadow-none">
         {#if refreshing}
           <BarSpinner bars={4} />
