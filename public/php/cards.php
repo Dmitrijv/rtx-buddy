@@ -53,6 +53,8 @@ foreach($inetJson as $key=>$json) {
   
   $name = $json['name'];
   $name = str_ireplace("GeForce RTX 3080 10GB", "", $name);
+  $name = str_ireplace("GeForce RTX 3080 Ti", "", $name);
+  $name = str_ireplace(" 12GB", "", $name);
   $name = str_ireplace("  ", " ", $name);
   $card['name'] = $name;
   
