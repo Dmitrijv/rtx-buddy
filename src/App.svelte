@@ -21,7 +21,7 @@
         refreshing = false;
         if (cardList.length > 0 && cardList[0].status < 2) {
           const bestCard = cardList[0];
-          document.title = `${bestCard.price} @${bestCard.name}`;
+          document.title = `${bestCard.price} - ${bestCard.name}`;
         } else {
           document.title = "RTX 3080";
         }
