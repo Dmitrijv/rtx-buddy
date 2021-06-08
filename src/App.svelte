@@ -11,18 +11,20 @@
   async function updateCardList(isRefresh = false) {
     if (refreshing) return;
     refreshing = isRefresh;
-    console.log("New network request.");
+    //console.log("New network request.");
     // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
+    const now = new Date().toLocaleTimeString("en-US", { hour12: false, hour: "numeric", minute: "numeric" });
     await fetch("php/cards.php")
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
         loading = false;
         refreshing = false;
+        timestamp = now;
         if (cardList.length > 0 && cardList[0].status < 2) {
           const bestCard = cardList[0];
           const bestPrice = new Intl.NumberFormat("en-IN").format(Math.floor(bestCard.price));
-          document.title = `${bestPrice} - ${bestCard.name}`;
+          document.title = `${bestPrice} - ${bestCard.name} ( ${now} )`;
         } else {
           document.title = "RTX 3080";
         }
@@ -34,7 +36,6 @@
         refreshing = false;
         timestamp = "ERR";
       });
-    timestamp = new Date().toLocaleTimeString("en-US", { hour12: false, hour: "numeric", minute: "numeric" });
   }
 
   let interval;
