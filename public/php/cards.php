@@ -202,6 +202,12 @@ foreach($prisjaktJson as $key=>$json) {
 
 
 function compareCards($a, $b) {
+
+  // if both cards are in stock (whether stock is known or not) sort by price
+  if ($a['status'] <= ProductStatus::InStock && $b['status'] <= ProductStatus::InStock) {
+    return $a['price'] > $b['price'] ? 1 : -1;
+  }
+
   if ($a['status'] == $b['status']) {
     if ($a['status'] == ProductStatus::Incoming) { 
       if (strlen($a['restockDate']) < 10) { return 1; }
