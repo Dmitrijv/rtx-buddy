@@ -27,10 +27,11 @@
       <th scope="col">Model</th>
       <th scope="col" class="d-none d-sm-table-cell">Restock</th>
       <th scope="col" class="d-none d-sm-table-cell">Days</th>
+      <th scope="col" class="d-none d-sm-table-cell">Source</th>
     </tr>
   </thead>
   <tbody class="inet-gpu-tbody">
-    {#each cardList as { id, url, price, name, qty, status, restockDate, restockDays }, i}
+    {#each cardList as { id, url, price, name, qty, status, restockDate, restockDays, source }, i}
       <tr>
         <td>
           <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))}</span>
@@ -38,6 +39,13 @@
         <td><a href={url}>{@html name.replace("Ti", "<strong>Ti</strong>")}</a></td>
         <td class="d-none d-sm-table-cell">{restockDate}</td>
         <td class="d-none d-sm-table-cell">{restockDays}</td>
+        <td class="d-none d-sm-table-cell logo-cell">
+          <img
+            class="source-logo {source == 'prisjakt' ? 'bg-prisjakt' : ''}"
+            src={`image/svg/logo-${source}.svg`}
+            alt={source}
+          />
+        </td>
       </tr>
     {/each}
   </tbody>
@@ -51,6 +59,16 @@
 
   span {
     padding: 2px 4px;
+  }
+
+  .logo-cell {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .bg-prisjakt {
+    background: rgb(0, 173, 219);
   }
 
   .in-stock {
@@ -73,5 +91,10 @@
 
   a {
     text-decoration: none;
+  }
+
+  img.source-logo {
+    max-height: 16px;
+    border-radius: 4px;
   }
 </style>
