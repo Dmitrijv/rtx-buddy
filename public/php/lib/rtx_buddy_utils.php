@@ -29,9 +29,12 @@ function cleanCardName($name) {
   $name = str_ireplace(" 12Gb", "", $name);
   $name = str_ireplace(" 10G", "", $name);
   $name = str_ireplace(" 12G", "", $name);
+  $name = str_ireplace(" GDDR5,", "", $name);
+  $name = str_ireplace(" GDDR6,", "", $name);
   $name = str_ireplace(" GDDR6X", "", $name);
-  $name = str_ireplace(" GDDR6X,", "", $name);
   $name = str_ireplace(" USB 3.0,", "", $name);
+  $name = str_ireplace(" 1.4a", "", $name);
+  $name = str_ireplace(" 2.1", "", $name);
   
   // primlogic
   $name = str_ireplace(" Aura Sync RGB", "", $name);
@@ -63,6 +66,12 @@ function cleanCardName($name) {
   $name = str_ireplace(" PCI Express 4.0", "", $name);
   $name = str_ireplace(" grafikkort", "", $name);
   
+  // compliq
+  $name = str_ireplace(" DPX3X2", "", $name);
+  $name = str_ireplace(" CTLR", "", $name);
+  $name = str_ireplace(" DP", "", $name);   
+  $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);   
+
   // Misc
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
