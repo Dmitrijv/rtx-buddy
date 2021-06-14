@@ -95,6 +95,7 @@
 
   img.source-logo {
     max-height: 16px;
+    max-width: 50px;
     border-radius: 4px;
   }
 </style>
