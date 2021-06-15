@@ -57,13 +57,14 @@ function getInetCards() {
     $card['restockDate'] = strtotime($restockDate) > strtotime('now') ? $restockDate : '';
 
     // do a sanity check on restock date
-    if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) < strtotime('now') ) {
+    if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) <= strtotime('now') ) {
       $card['status'] = ProductStatus::Delayed;
       $card['restockDays'] = '';
     } else { 
       $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
-      // $card['restockDays'] = array_key_exists('restockDays', $loc) ? $loc['restockDays'] : '';
     }
+
+    $card['restockDays'] = $card['restockDays'] == 0 ? '' : $card['restockDays'];
 
     $card['source'] = "inet";
 

@@ -94,7 +94,7 @@ function getPrisjaktCards() {
     // $card['qty'] = (int)$qty;
 
     // do a sanity check on restock date
-    if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) < strtotime('now') ) {
+    if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) <= strtotime('now') ) {
       $card['status'] = ProductStatus::Delayed;
       $card['restockDays'] = '';
     } else {
