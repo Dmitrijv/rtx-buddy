@@ -56,6 +56,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" /3xDP", "", $name);
 
   // CDON
+  $name = str_ireplace(" 2xDP", "", $name);
   $name = str_ireplace(" 3xDP", "", $name);
   $name = str_ireplace(" 7680 x 4320 pixel,", "", $name);
   $name = str_ireplace(" 7680 x 4320 piksler", "", $name);
@@ -73,9 +74,16 @@ function cleanCardName($name) {
   $name = str_ireplace(" DP", "", $name);
   $name = str_ireplace(" - GF", "", $name);
   $name = str_ireplace(" x16", "", $name);
+  $name = str_ireplace(" graphics card", "", $name);
+  $name = str_ireplace("-RTX3080-O10G-WHITE -", "", $name);
+  $name = str_ireplace("(NED308T019KB-1020G)", "", $name);
+  $name = str_ireplace("(38IYM3MD99SK)", "", $name);
   $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
   $name = str_ireplace(" 3 x DisplayPort", "", $name);
   $name = str_ireplace(" vit", "", $name);
+  $name = str_ireplace(" 2 x", "", $name);
+  $name = str_ireplace(" 3 x", "", $name);
+  $name = str_ireplace(" -", "", $name);
 
   // Misc
   $name = str_ireplace("  ", " ", $name);
