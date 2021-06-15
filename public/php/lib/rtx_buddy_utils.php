@@ -64,13 +64,18 @@ function cleanCardName($name) {
   $name = str_ireplace(" 320 bit", "", $name);
   $name = str_ireplace(" PCI Express x16 4.0", "", $name);
   $name = str_ireplace(" PCI Express 4.0", "", $name);
+  $name = str_ireplace(" PCIe 4.0", "", $name);
   $name = str_ireplace(" grafikkort", "", $name);
   
   // compliq
   $name = str_ireplace(" DPX3X2", "", $name);
   $name = str_ireplace(" CTLR", "", $name);
-  $name = str_ireplace(" DP", "", $name);   
-  $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);   
+  $name = str_ireplace(" DP", "", $name);
+  $name = str_ireplace(" - GF", "", $name);
+  $name = str_ireplace(" x16", "", $name);
+  $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
+  $name = str_ireplace(" 3 x DisplayPort", "", $name);
+  $name = str_ireplace(" vit", "", $name);
 
   // Misc
   $name = str_ireplace("  ", " ", $name);

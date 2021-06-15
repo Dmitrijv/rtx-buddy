@@ -20,8 +20,6 @@ function getCompliqCards() {
     }
 
     $name = $listItem->find('a.b-product-list__item-name', 0)->plaintext;
-    $name = str_ireplace(" GDDR5,", "", $name);
-    $name = str_ireplace(" GDDR6,", "", $name);
     $name = cleanCardName($name);
     $card['name'] = trim($name);
 
