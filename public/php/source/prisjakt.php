@@ -18,7 +18,7 @@ function getPrisjaktCards() {
   $GQLRelease = $matches[1];
   $GQLVersion = $matches[2];
 
-  $prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRelease.'&version='.$GQLVersion.'&main=productCollection&variables={"slug":"grafikkort","type":"c","query":{"url":null,"filters":[{"id":"5530","type":"term","property":"4104"},{"id":"36254","type":"term","property":"532"}],"aggregations":[],"sort":"property.in_stock","offset":0},"productPropertyIds":["532","6716"],"productPropertyColumnIds":["532","6716"],"campaignId":4,"personalizationClientId":"","pulseEnvironmentId":""}';
+  $prisjaktEndpoint = 'https://www.prisjakt.nu/_internal/graphql?release='.$GQLRelease.'&version='.$GQLVersion.'&main=search&variables={%22id%22:%22search%22,%22query%22:%22rtx%203080%22,%22sort%22:%22score%22,%22order%22:%22desc%22,%22offset%22:0,%22filters%22:[{%22id%22:%22category_id%22,%22selected%22:[]},{%22id%22:%22brand_id%22,%22selected%22:[]},{%22id%22:%22lowest_price%22},{%22id%22:%22user_rating%22}],%22productModes%22:[%22product%22,%22raw%22],%22campaignId%22:4,%22personalizationClientId%22:%22%22,%22pulseEnvironmentId%22:%22%22}';
   $prisjaktRes = getJsonFromApi($prisjaktEndpoint);
   $prisjaktJson = $prisjaktRes['data']['productCollection']['slices'][5]['products'];
 

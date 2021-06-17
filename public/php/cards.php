@@ -14,7 +14,8 @@ require_once __DIR__ . '/source/compliq.php';
 require_once __DIR__ . '/source/netonnet.php';
 
 $inetCards = getInetCards();
-$prisjaktCards = getPrisjaktCards(); 
+// $prisjaktCards = getPrisjaktCards();
+$prisjaktCards = [];
 $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
 $compliqCards = getCompliqCards();
@@ -23,15 +24,17 @@ $netonnetCards = getNetonnetCards();
 $cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards, $netonnetCards);
 $cards = array_filter($cards, "isRequested");
 
-// remove potential
-foreach ($cards as $key => $card) {
-  $similarCards = array_filter($cards, function($c) use ($card) {
-      return $card['source'] !== $c['source'] && trim($card['name']) == trim($c['name']) && $card['price'] == $c['price'];
-    }
-  );
+// remove potential duplicates
+// foreach ($cards as $key => $card) {
+//   $similarCards = array_filter($cards, function($c) use ($card) {
+//       return $card['source'] !== $c['source'] && trim($card['name']) == trim($c['name']) && $card['price'] == $c['price'];
+//     }
+//   );
 
-  if (count($similarCards) > 0) { unset($cards[$key]); }
-}
+//   if (count($similarCards) > 0) {
+//     unset($cards[$key]);
+//   }
+// }
 
 usort($cards, "compareCards");
 echo json_encode($cards);
