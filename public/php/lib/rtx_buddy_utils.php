@@ -18,7 +18,8 @@ function cleanCardName($name) {
 
   $name = str_ireplace("TI", "Ti", $name);
   $name = str_ireplace("ti", "Ti", $name);
-
+  $name = str_ireplace("RTX 3080Ti GAMING TRIO", "", $name);
+  $name = str_ireplace(" ()", "", $name);
   // Common
   $name = str_ireplace("GeForce RTX 3080", "", $name);
   $name = str_ireplace(" RTX 3080", "", $name);
@@ -82,10 +83,12 @@ function cleanCardName($name) {
   $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
   $name = str_ireplace(" 3 x DisplayPort", "", $name);
   $name = str_ireplace(" RGB GAMING", "", $name);
-  $name = str_ireplace(" (RTX 3080Ti GAMING TRIO)", "", $name);
+
+  $name = str_ireplace(" EPIC-X GAMING EdiTion", "", $name);
   $name = str_ireplace(" vit", "", $name);
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
+  $name = str_ireplace(" 2.0", "", $name);
   $name = str_ireplace(" -", "", $name);
 
   // Misc
