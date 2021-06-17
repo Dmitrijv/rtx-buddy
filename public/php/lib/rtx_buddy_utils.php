@@ -58,6 +58,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" /3xDP", "", $name);
 
   // CDON
+  $name = str_ireplace(" EdiTion 3x DisplayPort 1x 2x 8-Pin", "", $name);
   $name = str_ireplace(" 2xDP", "", $name);
   $name = str_ireplace(" 3xDP", "", $name);
   $name = str_ireplace(" 7680 x 4320 pixel,", "", $name);
@@ -89,6 +90,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
   $name = str_ireplace(" 2.0", "", $name);
+  $name = str_ireplace(" P", "", $name);
   $name = str_ireplace(" -", "", $name);
 
   // Misc
@@ -154,7 +156,7 @@ function getDateByDaysLeft($days) {
 function pp($input) {
   echo '<pre>';
   print_r($input);
-  //var_dump($input);
+  // var_dump($input);
   echo '</pre>';
 }
 

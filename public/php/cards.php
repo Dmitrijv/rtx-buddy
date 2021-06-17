@@ -11,14 +11,16 @@ require_once __DIR__ . '/source/primlogic.php';
 require_once __DIR__ . '/source/prisjakt.php';
 require_once __DIR__ . '/source/cdon.php';
 require_once __DIR__ . '/source/compliq.php';
+require_once __DIR__ . '/source/netonnet.php';
 
 $inetCards = getInetCards();
 $prisjaktCards = getPrisjaktCards(); 
 $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
 $compliqCards = getCompliqCards();
+$netonnetCards = getNetonnetCards();
 
-$cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards);
+$cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards, $netonnetCards);
 $cards = array_filter($cards, "isRequested");
 
 usort($cards, "compareCards");
