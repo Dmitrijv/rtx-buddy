@@ -33,6 +33,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" GDDR6,", "", $name);
   $name = str_ireplace(" GDDR6X", "", $name);
   $name = str_ireplace(" USB 3.0,", "", $name);
+  $name = str_ireplace(" RGB", "", $name);
   $name = str_ireplace(" 1.4a", "", $name);
   $name = str_ireplace(" 2.1", "", $name);
   
@@ -80,6 +81,8 @@ function cleanCardName($name) {
   $name = str_ireplace("(38IYM3MD99SK)", "", $name);
   $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
   $name = str_ireplace(" 3 x DisplayPort", "", $name);
+  $name = str_ireplace(" RGB GAMING", "", $name);
+  $name = str_ireplace(" (RTX 3080Ti GAMING TRIO)", "", $name);
   $name = str_ireplace(" vit", "", $name);
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
