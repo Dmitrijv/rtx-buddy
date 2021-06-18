@@ -40,11 +40,13 @@
         <td class="d-none d-sm-table-cell">{restockDate}</td>
         <td class="d-none d-sm-table-cell">{restockDays}</td>
         <td class="d-none d-sm-table-cell logo-cell">
-          <img
-            class="source-logo {source == 'prisjakt' ? 'bg-prisjakt' : ''}"
-            src={`image/svg/logo-${source}.svg`}
-            alt={source}
-          />
+          <a href={url}>
+            <img
+              class="source-logo {source == 'prisjakt' ? 'bg-prisjakt' : ''}"
+              src={`image/svg/logo-${source}.svg`}
+              alt={source}
+            />
+          </a>
         </td>
       </tr>
     {/each}
