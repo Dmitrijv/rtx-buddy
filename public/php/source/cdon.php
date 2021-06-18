@@ -7,6 +7,8 @@ function getCdonCards() {
 
   $blacklist = [];
   $blacklist[71786767] = true;
+  $blacklist[58463462] = true;
+  $blacklist[58491554] = true;
 
   $cards = [];
 
@@ -22,7 +24,7 @@ function getCdonCards() {
 
     $name = $a->getAttribute('data-product-name');
     $name = cleanCardName($name);
-    $name = $id == 76586460 ? substr($name, 0, -25) : $name;
+    // $name = $id == 76586460 ? substr($name, 0, -25) : $name;
     $name = $id == 57870588 ? substr($name, 0, -15) : $name;   
     $card['name'] = cleanCardName($name);
     
