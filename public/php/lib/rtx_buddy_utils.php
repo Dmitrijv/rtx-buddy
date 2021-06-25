@@ -93,6 +93,9 @@ function cleanCardName($name) {
   $name = str_ireplace(" P", "", $name);
   $name = str_ireplace(" -", "", $name);
 
+  $name = str_ireplace(" RTX3080Ti", "", $name);
+  $name = str_ireplace(" OC-12G/2xHDMI", "", $name);
+
   // Misc
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
