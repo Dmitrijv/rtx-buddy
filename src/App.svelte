@@ -4,6 +4,8 @@
   import GpuTable from "./GpuTable.svelte";
 
   export let cardList = [];
+  export let inStockCount = 0;
+  export let incomingCount = 0;
   export let timestamp = "loading";
   export let loading = true;
   export let refreshing = false;
@@ -18,10 +20,12 @@
       .then((res) => res.json())
       .then((data) => {
         cardList = data;
+        inStockCount = cardList.filter((c) => c.status <= 1).length;
+        incomingCount = cardList.length - inStockCount;
         loading = false;
         refreshing = false;
         timestamp = now;
-        if (cardList.length > 0 && cardList[0].status < 2) {
+        if (cardList.length > 0 && cardList[0].status <= 1) {
           const bestCard = cardList[0];
           const bestPrice = new Intl.NumberFormat("en-IN").format(Math.floor(bestCard.price));
           document.title = `${bestPrice} - ${bestCard.name} ( ${now} )`;
@@ -51,10 +55,13 @@
 </script>
 
 <main>
-  <!-- Header -->
+  <!-- Header <span class="tracked-model-label">RTX 3080</span> -->
   <div class="nav-container">
     <div class="nav">
-      <h1>RTX 3080 ({cardList.length})</h1>
+      <h1>
+        <span class="tracked-model-label">RTX 3080</span>
+        <span class="in-stock">{inStockCount}</span> / <span class="incoming">{incomingCount}</span>
+      </h1>
       <div class="btn btn-light shadow-none">
         {#if refreshing}
           <BarSpinner bars={4} />
@@ -76,7 +83,13 @@
   </div>
 </main>
 
-<style>
+<style lang="scss">
+  .tracked-model-label {
+    @media (max-width: 576px) {
+      display: none;
+    }
+  }
+
   .nav-container {
     background-color: white;
     margin-bottom: 30px;
@@ -125,5 +138,20 @@
     margin: 10px auto;
     padding: 4px;
     border-radius: 6px;
+  }
+
+  .in-stock {
+    font-weight: bold;
+    color: rgb(139, 170, 98);
+  }
+
+  .incoming {
+    font-weight: bold;
+    color: rgb(222, 186, 90);
+  }
+
+  .sold-out {
+    font-weight: bold;
+    color: rgb(164, 68, 65);
   }
 </style>
