@@ -25,6 +25,7 @@ function getInetCards() {
     '5412383', //Gigabyte Geforce RTX 3080 Ti 12GB AORUS MASTER
     '5412336', //MSI GeForce RTX 3080 Ti 12GB SUPRIM X
     '5412363', //PNY GeForce RTX 3080 Ti 12GB XLR8 Gaming REVEL RGB
+    '5412337', //MSI GeForce RTX 3080 Ti 12GB GAMING X TRIO
   );
 
   $cards = [];
