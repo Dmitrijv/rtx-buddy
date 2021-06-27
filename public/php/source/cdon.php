@@ -9,6 +9,7 @@ function getCdonCards() {
   $blacklist[71786767] = true;
   $blacklist[58463462] = true;
   $blacklist[58491554] = true;
+  $blacklist[58066441] = true;
 
   $cards = [];
 
