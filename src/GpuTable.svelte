@@ -7,16 +7,6 @@
     else if (status == 2) return "incoming";
     return "sold-out";
   }
-
-  function getStatusLabel(status) {
-    if (status == 0) return "in stock";
-    else if (status == 1) return "in stock";
-    else if (status == 2) return "incoming";
-    else if (status == 3) return "delayed";
-    else if (status == 4) return "sold out";
-    else if (status == 5) return "blocked";
-    return "n/a";
-  }
 </script>
 
 <!-- GPU Table -->
