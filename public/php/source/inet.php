@@ -22,11 +22,12 @@ function getInetCards() {
     '5411726', //EVGA GeForce RTX 3080 10GB XC3 ULTRA
     // 3080 ti
     '5412319', //ASUS GeForce RTX 3080 Ti 12GB TUF GAMING OC
-    '5412383', //Gigabyte Geforce RTX 3080 Ti 12GB AORUS MASTER
     '5412336', //MSI GeForce RTX 3080 Ti 12GB SUPRIM X
-    '5412363', //PNY GeForce RTX 3080 Ti 12GB XLR8 Gaming REVEL RGB
     '5412337', //MSI GeForce RTX 3080 Ti 12GB GAMING X TRIO
+    '5412363', //PNY GeForce RTX 3080 Ti 12GB XLR8 Gaming REVEL RGB
+    '5412369', //EVGA GeForce RTX 3080 Ti 12GB XC3 ULTRA
     '5412370', //EVGA GeForce RTX 3080 Ti 12GB XC3 ULTRA
+    '5412383', //Gigabyte Geforce RTX 3080 Ti 12GB AORUS MASTER
   );
 
   $cards = [];
