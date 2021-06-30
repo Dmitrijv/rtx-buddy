@@ -11,12 +11,28 @@ function getPricerunnerCards() {
 
   $cards = [];
 
-  $html = file_get_html("https://cdon.se/catalog/search?q=rtx+3080&taxonomyId=392");
+  $html = file_get_html("https://www.pricerunner.se/cl/37/Grafikkort?attr_60534005=60534009&attr_60534931=100000354,60534998&onlyInStock=true&sort=price_asc");
 
-  foreach($html->find('div._3808JSp2qk div._2Vdwcz_zWR') as $listItem) {
+  foreach($html->find('div._2LGIE9LjOC div._1bgVr-M90D') as $listItem) {
 
-    $url = $listItem->find('a', 0)->href;
+    $url = $listItem->find('a', 0);
+    if (!isset($url)) { 
+      // pp($url);
+      continue;
+     }
+
+    $url = $url->href;
+    if (!isset($url)) { 
+      // pp($url);
+      continue;
+     }
+
     preg_match('/\/pl\/(.*)\/Grafikkort/mU', $url, $matches);
+    if (!isset($matches[1])) { 
+      // pp($matches);
+      continue;
+     }
+
     $id = $matches[1];
 
     if (array_key_exists($id, $blacklist) == true) {
