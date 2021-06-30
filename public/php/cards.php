@@ -20,8 +20,9 @@ $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
 $compliqCards = getCompliqCards();
 $netonnetCards = getNetonnetCards();
+$pricerunnerCards = getPricerunnerCards();
 
-$cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards, $netonnetCards);
+$cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards, $netonnetCards, $pricerunnerCards);
 $cards = array_filter($cards, "isRequested");
 
 // remove potential duplicates
