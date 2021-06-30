@@ -12,17 +12,26 @@ require_once __DIR__ . '/source/prisjakt.php';
 require_once __DIR__ . '/source/cdon.php';
 require_once __DIR__ . '/source/compliq.php';
 require_once __DIR__ . '/source/netonnet.php';
+require_once __DIR__ . '/source/pricerunner.php';
 
 $inetCards = getInetCards();
-// $prisjaktCards = getPrisjaktCards();
-$prisjaktCards = [];
+$prisjaktCards = []; //  getPrisjaktCards();
 $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
 $compliqCards = getCompliqCards();
 $netonnetCards = getNetonnetCards();
 $pricerunnerCards = getPricerunnerCards();
 
-$cards = array_merge($inetCards, $prisjaktCards, $primlogicCards, $cdonCards, $compliqCards, $netonnetCards, $pricerunnerCards);
+$cards = array_merge(
+  $inetCards,
+  $prisjaktCards,
+  $primlogicCards,
+  $cdonCards,
+  $compliqCards,
+  $netonnetCards,
+  $pricerunnerCards
+);
+
 $cards = array_filter($cards, "isRequested");
 
 // remove potential duplicates
