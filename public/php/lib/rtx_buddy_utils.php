@@ -96,6 +96,11 @@ function cleanCardName($name) {
   $name = str_ireplace(" RTX3080Ti", "", $name);
   $name = str_ireplace(" OC-12G/2xHDMI", "", $name);
 
+  // PriceRunner
+  $name = str_ireplace(" Epic-X", "", $name);
+  $name = str_ireplace(" Microsystems", "", $name);
+  $name = str_ireplace(" GameRock", "", $name);
+
   // Misc
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
