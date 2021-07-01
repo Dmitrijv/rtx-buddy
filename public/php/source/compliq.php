@@ -10,7 +10,12 @@ function getCompliqCards() {
   
   $cards = [];
 
-  $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90/s_14?ffd=l-p25392-v2190123_v2191901l-p25393-v2192209&kw=rtx+3080");
+  try {
+    $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90/s_14?ffd=l-p25392-v2190123_v2191901l-p25393-v2192209&kw=rtx+3080");
+  } catch (Exception $e) {
+    return [];
+    die;
+  }
 
   foreach($html->find('div.b-product-list div.b-product-list__item') as $listItem) {
 
