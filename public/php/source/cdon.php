@@ -16,7 +16,7 @@ function getCdonCards() {
   $html = file_get_html("https://cdon.se/catalog/search?q=rtx+3080&taxonomyId=392"); // ->save()
 
   foreach($html->find('div.catalog-page--product-list-wrapper a.p-c') as $a) {
-    $id = $a->getAttribute('data-id');
+    $id = $a->getAttribute('data-id');  
 
     // skip blacklisted products
     if (array_key_exists($id, $blacklist) == true) {
