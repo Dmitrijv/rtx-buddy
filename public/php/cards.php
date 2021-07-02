@@ -15,10 +15,10 @@ require_once __DIR__ . '/source/netonnet.php';
 require_once __DIR__ . '/source/pricerunner.php';
 
 $inetCards = getInetCards();
-$prisjaktCards = []; //  getPrisjaktCards();
+$prisjaktCards = []; // getPrisjaktCards();
 $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
-$compliqCards = getCompliqCards();
+$compliqCards = getCompliqCards(); // getCompliqCards(); [];
 $netonnetCards = getNetonnetCards();
 $pricerunnerCards = getPricerunnerCards();
 
