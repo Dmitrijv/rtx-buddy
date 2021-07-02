@@ -10,7 +10,7 @@ function getCompliqCards() {
   
   $cards = [];
 
-  $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90/s_14?ffd=l-p25392-v2190123_v2191901l-p25393-v2192209&kw=rtx+3080");
+  $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90?ffd=l-c-100095_36132l-p25394-v2189995&kw=rtx+3080");
   if($html === FALSE) { return []; }
 
   foreach($html->find('div.b-product-list div.b-product-list__item') as $listItem) {
@@ -38,31 +38,33 @@ function getCompliqCards() {
     $card['price'] = $price;
 
     $status = $listItem->find('span.b-show-stock__value', 1)->plaintext;
-    //echo $status . '<br/>';
     $card['status'] = getCompliqStatus($status);
+
+    //$eta = $listItem->find('span.b-show-stock__out-of-stock-with-eta span.b-show-stock__eta-date', 1)->plaintext;
+    
+    $restockTag = $listItem->find('span.b-show-stock__eta-date', 0);
+    if (is_object($restockTag)) {
+      $card['status'] == ProductStatus::Incoming;
+    }
 
     // do a sanity check on restock date
     if ( $card['status'] == ProductStatus::Incoming ) {
-
-      $restockTag = $listItem->find('span.b-show-stock__eta-date', 0);
       
-      if (!isset($restockDate)) {
+      if (!isset($restockTag)) {
         $card['status'] = ProductStatus::Delayed;
         $card['restockDays'] = '';
       } else {
 
-      $restockDate = trim($restockTag->plaintext);
-      if ( trlen($restockDate) > 0 && strtotime($restockDate) > strtotime('now') ) {
-        $card['restockDate'] = $restockDate;
-        $card['restockDays'] = getDaysToDate($restockDate);
-      } else {
-        $card['status'] = ProductStatus::Delayed;
-        $card['restockDays'] = '';
-      }
+        $restockDate = trim($restockTag->plaintext);
+        if ( strlen($restockDate) > 0 && strtotime($restockDate) > strtotime('now') ) {
+          $card['restockDate'] = $restockDate;
+          $card['restockDays'] = getDaysToDate($restockDate);
+        } else {
+          $card['status'] = ProductStatus::Delayed;
+          $card['restockDays'] = '';
+        }
 
       }
-      
-
 
     } else {
       $card['restockDate'] = '';
@@ -78,7 +80,8 @@ function getCompliqCards() {
 }
 
 function getCompliqStatus($string) {
-  //echo $string;
+  // echo $string;
+  // pp($string);
   if (str_contains($string, 'Inte p')) { return ProductStatus::SoldOut; }
   if (str_contains($string, '202')) { return ProductStatus::Incoming; }
   if (preg_match('/\\d/', $string) > 0) { return ProductStatus::InStock; }
