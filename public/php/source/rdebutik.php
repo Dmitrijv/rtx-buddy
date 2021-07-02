@@ -13,9 +13,9 @@ function getRdebutikCards() {
 
   $html = file_get_html("https://rdebutik.se/search_result/se/word/rtx+3080/page/1");
 
-  foreach($html->find('div.product_box_div a') as $listItem) {
+  foreach($html->find('div.product_box_div') as $listItem) {
     
-    $a = $listItem->find('a', 0);
+    $a = $listItem->find('a', 1);
 
     preg_match('/\/417\/(.*)\/sort/mU', $a, $matches);
     $id = $matches[1];
@@ -26,23 +26,26 @@ function getRdebutikCards() {
 
     $card['id'] = $id;
     
-    $url = $url->href;
+    $url = $a->href;
     $card['url'] = "https://rdebutik.se/" . $url;
 
-    $name = $a->plaintext;
+    $name = $a->getAttribute('title');
     $card['name'] = cleanCardName($name);
 
+    $statusEndpoint = 'https://rdebutik.se/o_ajax_get_product_availability_couriers_list.php?product_id='.$id.'&lang=se';
+    $status = mimicAjax($statusEndpoint);
+    $status = $status['couriers_tab_content'];
+    $card['status'] = str_contains($status, 'Beställ nu') ? ProductStatus::InStock : ProductStatus::SoldOut;
+
     $price = $listItem->find('.product_price_wo_discount_listing', 0)->plaintext;
-    $price = str_ireplace(" ", "", $price);
-    $price = str_ireplace("&nbsp;", "", $price);
-    $price = str_ireplace("kr", "", $price);
-    $price = str_ireplace(".00", "", $price);
-    $card['price'] = (int) trim($price);    
+
+    preg_match_all('/(\d+)\.00/m', $price, $matches, PREG_SET_ORDER, 0);
+    $card['price'] = (int) $matches[0][1];
 
     $card['restockDays'] = '';
     $card['restockDate'] = '';
 
-    $card['source'] = 'pricerunner';
+    $card['source'] = 'rdebutik';
 
     $cards[$id] = $card;
   }

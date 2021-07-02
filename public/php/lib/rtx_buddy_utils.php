@@ -104,8 +104,10 @@ function cleanCardName($name) {
   $name = str_ireplace(" Epic-X", "", $name);
   $name = str_ireplace(" Microsystems", "", $name);
   $name = str_ireplace(" GameRock", "", $name);
-
-
+  
+  // Rdebutik
+  $name = str_ireplace(" 320bit", "", $name);
+  $name = str_ireplace(" 384bit", "", $name);
 
   // Misc
   $name = str_ireplace("  ", " ", $name);
@@ -153,6 +155,18 @@ function getJsonFromApi($endpoint, $body = null) {
   $result = curl_exec($handle);
   curl_close($handle);
 
+  return json_decode($result, true);
+}
+
+function mimicAjax($endpoint) {
+  $curl = curl_init($endpoint);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, array("X-Requested-With: XMLHttpRequest", "Content-Type: application/json; charset=utf-8"));
+  curl_setopt($curl, CURLOPT_FAILONERROR, true);
+  curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);  
+  $result = curl_exec($curl);
   return json_decode($result, true);
 }
 
