@@ -13,6 +13,7 @@ require_once __DIR__ . '/source/cdon.php';
 require_once __DIR__ . '/source/compliq.php';
 require_once __DIR__ . '/source/netonnet.php';
 require_once __DIR__ . '/source/pricerunner.php';
+require_once __DIR__ . '/source/webhallen.php';
 
 $inetCards = getInetCards();
 $prisjaktCards = []; // getPrisjaktCards();
@@ -21,6 +22,7 @@ $cdonCards = getCdonCards();
 $compliqCards = getCompliqCards(); // getCompliqCards(); [];
 $netonnetCards = getNetonnetCards();
 $pricerunnerCards = getPricerunnerCards();
+$webhallenCards = getWebhallenCards();
 
 $cards = array_merge(
   $inetCards,
@@ -29,7 +31,8 @@ $cards = array_merge(
   $cdonCards,
   $compliqCards,
   $netonnetCards,
-  $pricerunnerCards
+  $pricerunnerCards,
+  $webhallenCards
 );
 
 $cards = array_filter($cards, "isRequested");
