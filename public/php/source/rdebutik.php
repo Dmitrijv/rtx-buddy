@@ -27,12 +27,17 @@ function getRdebutikCards() {
     $card['id'] = $id;
     
     $url = $a->href;
+    if (!isset($url)) {
+      continue;
+    }
+
     $card['url'] = "https://rdebutik.se/" . $url;
 
     $name = $a->getAttribute('title');
     $card['name'] = cleanCardName($name);
 
     $statusEndpoint = 'https://rdebutik.se/o_ajax_get_product_availability_couriers_list.php?product_id='.$id.'&lang=se';
+
     $status = mimicAjax($statusEndpoint);
     $status = $status['couriers_tab_content'];
     $card['status'] = str_contains($status, 'Beställ nu') ? ProductStatus::InStock : ProductStatus::SoldOut;
