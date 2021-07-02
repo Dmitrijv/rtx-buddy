@@ -29,6 +29,10 @@ function getNetonnetCards() {
     $id = $listItem->find('div.smallHeader div.shortText a', 0)->getAttribute('data-track');
 
     $name = $listItem->find('div.smallHeader div.shortText a', 0)->getAttribute('title');
+    if (str_contains($name, "3090") === true) {
+      continue;
+    }
+
     $name = cleanCardName($name);
     $card['name'] = trim($name);
 
