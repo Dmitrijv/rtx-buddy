@@ -72,6 +72,8 @@ function cleanCardName($name) {
   $name = str_ireplace(" grafikkort", "", $name);
   
   // compliq
+  $name = str_ireplace("GDDR5,", "", $name);
+  $name = str_ireplace("GDDR6,", "", $name);
   $name = str_ireplace(" DPX3X2", "", $name);
   $name = str_ireplace(" CTLR", "", $name);
   $name = str_ireplace(" DP", "", $name);
@@ -79,6 +81,8 @@ function cleanCardName($name) {
   $name = str_ireplace(" x16", "", $name);
   $name = str_ireplace(" graphics card", "", $name);
   $name = str_ireplace("-RTX3080-O10G-WHITE -", "", $name);
+  $name = str_ireplace("-RTX3080", " ", $name);
+  $name = str_ireplace("-O12G", "", $name);
   $name = str_ireplace("(NED308T019KB-1020G)", "", $name);
   $name = str_ireplace("(38IYM3MD99SK)", "", $name);
   $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
@@ -100,6 +104,8 @@ function cleanCardName($name) {
   $name = str_ireplace(" Epic-X", "", $name);
   $name = str_ireplace(" Microsystems", "", $name);
   $name = str_ireplace(" GameRock", "", $name);
+
+
 
   // Misc
   $name = str_ireplace("  ", " ", $name);
