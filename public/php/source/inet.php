@@ -28,6 +28,7 @@ function getInetCards() {
     '5412369', //EVGA GeForce RTX 3080 Ti 12GB XC3 ULTRA
     '5412370', //EVGA GeForce RTX 3080 Ti 12GB XC3 ULTRA
     '5412383', //Gigabyte Geforce RTX 3080 Ti 12GB AORUS MASTER
+    '5412320', //ASUS GeForce RTX 3080 Ti 12GB STRIX GAMING OC
   );
 
   $cards = [];
