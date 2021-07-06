@@ -8,7 +8,7 @@ function getPricerunnerCards() {
 
   $blacklist = [];
   $blacklist['37-3200210610'] = true;
-  $blacklist['37-3200221870'] = true;
+  // $blacklist['37-3200221870'] = true;
 
   $cards = [];
 
