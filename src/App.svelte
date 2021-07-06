@@ -150,8 +150,8 @@
     color: rgb(222, 186, 90);
   }
 
-  .sold-out {
-    font-weight: bold;
-    color: rgb(164, 68, 65);
-  }
+  // .sold-out {
+  //   font-weight: bold;
+  //   color: rgb(164, 68, 65);
+  // }
 </style>

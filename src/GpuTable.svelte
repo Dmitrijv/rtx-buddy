@@ -26,7 +26,7 @@
         <td>
           <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))}</span>
         </td>
-        <td><a href={url}>{@html name.replace(" Ti ", "<strong> Ti </strong>")}</a></td>
+        <td class="name-cell"><a href={url}>{@html name.replace(" Ti ", "<strong> Ti </strong>")}</a></td>
         <td class="d-none d-sm-table-cell">{restockDate}</td>
         <td class="d-none d-sm-table-cell">{restockDays}</td>
         <td class="d-none d-sm-table-cell logo-cell">
@@ -43,7 +43,7 @@
   </tbody>
 </table>
 
-<style>
+<style lang="scss">
   .table-hover > tbody > tr:hover {
     --bs-table-accent-bg: none !important;
     background-color: whitesmoke !important;
@@ -51,6 +51,11 @@
 
   span {
     padding: 2px 4px;
+  }
+
+  .name-cell {
+    overflow: hidden;
+    word-break: break-all;
   }
 
   .logo-cell {
