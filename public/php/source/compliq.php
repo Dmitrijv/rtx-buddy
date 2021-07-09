@@ -47,6 +47,11 @@ function getCompliqCards() {
       $card['status'] == ProductStatus::Incoming;
     }
 
+    $inStockIcon = $listItem->find('i.icon-in-stock', 0);
+    if (is_object($inStockIcon)) {
+      $card['status'] == ProductStatus::InStock;
+    }
+
     // do a sanity check on restock date
     if ( $card['status'] == ProductStatus::Incoming ) {
       
