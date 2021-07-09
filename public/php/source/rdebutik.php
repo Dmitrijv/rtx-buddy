@@ -7,7 +7,7 @@ require_once __DIR__ . '/../lib/rtx_buddy_utils.php';
 function getRdebutikCards() {
 
   $blacklist = [];
-  // $blacklist['3200210610'] = true;
+  $blacklist['174290'] = true;
 
   $cards = [];
 
@@ -34,7 +34,11 @@ function getRdebutikCards() {
     $card['url'] = "https://rdebutik.se/" . $url;
 
     $name = $a->getAttribute('title');
-    $card['name'] = cleanCardName($name);
+    $name = cleanCardName($name);
+    if (strlen($name) == 0) {
+      $name = "Generic"
+    }
+    $card['name'] = $name;
 
     $statusEndpoint = 'https://rdebutik.se/o_ajax_get_product_availability_couriers_list.php?product_id='.$id.'&lang=se';
 
