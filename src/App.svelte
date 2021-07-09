@@ -13,8 +13,6 @@
   async function updateCardList(isRefresh = false) {
     if (refreshing) return;
     refreshing = isRefresh;
-    //console.log("New network request.");
-    // await fetch("http://dmitrijv.se/projects/rtx-buddy/php/cards.php")
     const now = new Date().toLocaleTimeString("en-US", { hour12: false, hour: "numeric", minute: "numeric" });
     await fetch("php/cards.php")
       .then((res) => res.json())
@@ -24,22 +22,26 @@
         incomingCount = cardList.length - inStockCount;
         loading = false;
         refreshing = false;
+        updateDocumentTitle(cardList);
         timestamp = now;
-        if (cardList.length > 0 && cardList[0].status <= 1) {
-          const bestCard = cardList[0];
-          const bestPrice = new Intl.NumberFormat("en-IN").format(Math.floor(bestCard.price));
-          document.title = `${bestPrice} - ${bestCard.name} ( ${now} )`;
-        } else {
-          document.title = "RTX 3080";
-        }
       })
       .catch((error) => {
-        console.error("Network request error:", error);
+        console.error("Network request error: ", error);
         cardList = [];
         loading = false;
         refreshing = false;
         timestamp = "ERR";
       });
+  }
+
+  function updateDocumentTitle(cardList) {
+    if (cardList.length > 0 && cardList[0].status <= 1) {
+      const bestCard = cardList[0];
+      const bestPrice = new Intl.NumberFormat("en-IN").format(Math.floor(bestCard.price));
+      document.title = `${bestPrice} - ${bestCard.name}`;
+    } else {
+      document.title = "RTX 3080";
+    }
   }
 
   let interval;
