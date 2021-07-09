@@ -36,7 +36,7 @@ function getRdebutikCards() {
     $name = $a->getAttribute('title');
     $name = cleanCardName($name);
     if (strlen($name) == 0) {
-      $name = "Generic"
+      $name = "Generic";
     }
     $card['name'] = $name;
 
