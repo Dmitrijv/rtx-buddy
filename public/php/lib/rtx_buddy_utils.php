@@ -39,6 +39,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" 2.1", "", $name);
   
   // primlogic
+  $name = str_ireplace(" Fusion", "", $name);
   $name = str_ireplace(" Aura Sync RGB", "", $name);
   $name = str_ireplace(" / Ej bokningsbart!", "", $name);
   $name = str_ireplace(" externt grafikkort Thunderbolt 3,", "", $name);
@@ -72,8 +73,8 @@ function cleanCardName($name) {
   $name = str_ireplace(" grafikkort", "", $name);
   
   // compliq
-  $name = str_ireplace("GDDR5,", "", $name);
-  $name = str_ireplace("GDDR6,", "", $name);
+  $name = str_ireplace(" GDDR5", "", $name);
+  $name = str_ireplace(" GDDR6", "", $name);
   $name = str_ireplace(" DPX3X2", "", $name);
   $name = str_ireplace(" CTLR", "", $name);
   $name = str_ireplace(" DP", "", $name);
@@ -88,11 +89,15 @@ function cleanCardName($name) {
   $name = str_ireplace("/HDMI GeForce RTXâ„¢ 3080 EdiTion", "", $name);
   $name = str_ireplace(" 3 x DisplayPort", "", $name);
   $name = str_ireplace(" RGB GAMING", "", $name);
+  $name = str_ireplace(" RTX3080", "", $name); // ASUS VGA Asus ROG Strix
+  $name = str_ireplace(" 1.4", "", $name); // ASUS VGA Asus ROG Strix
+  $name = str_ireplace(" O10G V2-GAMING 2", "", $name);
 
   $name = str_ireplace(" EPIC-X GAMING EdiTion", "", $name);
   $name = str_ireplace(" vit", "", $name);
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
+  $name = str_ireplace(" 3x", "", $name);
   $name = str_ireplace(" 2.0", "", $name);
   $name = str_ireplace(" P", "", $name);
   $name = str_ireplace(" -", "", $name);
@@ -110,6 +115,9 @@ function cleanCardName($name) {
   $name = str_ireplace(" 384bit", "", $name);
 
   // Misc
+  $name = str_ireplace(" 1-click OC", " ", $name);
+  $name = str_ireplace(" 1-Click OC", " ", $name);
+  $name = str_ireplace(" (1-Click OC)", " ", $name);
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
   $name = str_ends_with($name, ' Ti') ? substr($name, 0, -3) : $name;
