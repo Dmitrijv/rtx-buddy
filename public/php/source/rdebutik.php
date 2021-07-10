@@ -8,6 +8,7 @@ function getRdebutikCards() {
 
   $blacklist = [];
   $blacklist['174290'] = true;
+  $blacklist['174278'] = true;
 
   $cards = [];
 
