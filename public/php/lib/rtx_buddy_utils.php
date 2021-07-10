@@ -92,6 +92,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" RTX3080", "", $name); // ASUS VGA Asus ROG Strix
   $name = str_ireplace(" 1.4", "", $name); // ASUS VGA Asus ROG Strix
   $name = str_ireplace(" O10G V2-GAMING 2", "", $name);
+  $name = str_ireplace(" CI-Express 4.0", "", $name);
 
   $name = str_ireplace(" EPIC-X GAMING EdiTion", "", $name);
   $name = str_ireplace(" vit", "", $name);
