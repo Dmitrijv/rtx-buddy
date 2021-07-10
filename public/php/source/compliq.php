@@ -10,7 +10,8 @@ function getCompliqCards() {
   
   $cards = [];
 
-  $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90?ffd=l-c-100095_36132l-p25394-v2189995&kw=rtx+3080");
+  // $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90?ffd=l-c-100095_36132l-p25394-v2189995&kw=rtx+3080");
+  $html = file_get_html("https://shop.compliq.se/search/l_en/ps_90?ffd=l-c-100095_36132&kw=rtx+3080");
   if($html === FALSE) { return []; }
 
   foreach($html->find('div.b-product-list div.b-product-list__item') as $listItem) {
@@ -37,19 +38,20 @@ function getCompliqCards() {
     $price = intval($price);
     $card['price'] = $price;
 
-    $status = $listItem->find('span.b-show-stock__value', 1)->plaintext;
-    $card['status'] = getCompliqStatus($status);
+
+    $inStockIcon = $listItem->find('.icon-in-stock', 0);
+    if (is_object($inStockIcon)) {
+      $card['status'] = ProductStatus::InStock;
+    } else {
+      $status = $listItem->find('span.b-show-stock__value', 1)->plaintext;
+      $card['status'] = getCompliqStatus($status);
+    }
 
     //$eta = $listItem->find('span.b-show-stock__out-of-stock-with-eta span.b-show-stock__eta-date', 1)->plaintext;
     
     $restockTag = $listItem->find('span.b-show-stock__eta-date', 0);
     if (is_object($restockTag)) {
       $card['status'] == ProductStatus::Incoming;
-    }
-
-    $inStockIcon = $listItem->find('i.icon-in-stock', 0);
-    if (is_object($inStockIcon)) {
-      $card['status'] == ProductStatus::InStock;
     }
 
     // do a sanity check on restock date
