@@ -116,10 +116,14 @@ function cleanCardName($name) {
   $name = str_ireplace(" 320bit", "", $name);
   $name = str_ireplace(" 384bit", "", $name);
 
+  
   // Misc
-  $name = str_ireplace(" 1-click OC", " ", $name);
-  $name = str_ireplace(" 1-Click OC", " ", $name);
+  $name = str_ireplace(" REVEL", " ", $name);
+  $name = str_ireplace(" Ampere", " ", $name);
+  $name = str_ireplace(" rev.", " ", $name);
   $name = str_ireplace(" (1-Click OC)", " ", $name);
+  $name = str_ireplace(" 1-Click OC", " ", $name);
+  $name = str_ireplace(" 1-click OC", " ", $name);
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
   $name = str_ends_with($name, ' Ti') ? substr($name, 0, -3) : $name;
