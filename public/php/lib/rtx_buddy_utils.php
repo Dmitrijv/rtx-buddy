@@ -118,6 +118,8 @@ function cleanCardName($name) {
 
   
   // Misc
+  $name = str_ireplace(" LHR", " ", $name);
+  $name = str_ireplace(" AMP", " ", $name);
   $name = str_ireplace(" REVEL", " ", $name);
   $name = str_ireplace(" Ampere", " ", $name);
   $name = str_ireplace(" rev.", " ", $name);
