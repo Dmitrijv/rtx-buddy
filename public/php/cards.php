@@ -8,7 +8,6 @@ header("Access-Control-Allow-Headers: X-Requested-With");
 
 require_once __DIR__ . '/source/inet.php';
 require_once __DIR__ . '/source/primlogic.php';
-require_once __DIR__ . '/source/prisjakt.php';
 require_once __DIR__ . '/source/cdon.php';
 require_once __DIR__ . '/source/compliq.php';
 require_once __DIR__ . '/source/netonnet.php';
@@ -18,10 +17,9 @@ require_once __DIR__ . '/source/rdebutik.php';
 require_once __DIR__ . '/source/komplett.php';
 
 $inetCards = getInetCards();
-$prisjaktCards = []; // getPrisjaktCards();
 $primlogicCards = getPrimlogicCards();
 $cdonCards = getCdonCards();
-$compliqCards = getCompliqCards(); // getCompliqCards(); [];
+$compliqCards = getCompliqCards();
 $netonnetCards = getNetonnetCards();
 $pricerunnerCards = getPricerunnerCards();
 $webhallenCards = getWebhallenCards();
@@ -30,7 +28,6 @@ $komplettCards = getKomplettCards();
 
 $cards = array_merge(
   $inetCards,
-  $prisjaktCards,
   $primlogicCards,
   $cdonCards,
   $compliqCards,
