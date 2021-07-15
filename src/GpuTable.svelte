@@ -55,7 +55,7 @@
 
   .name-cell {
     overflow: hidden;
-    word-break: break-all;
+    white-space: nowrap;
   }
 
   .logo-cell {
