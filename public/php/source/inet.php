@@ -54,7 +54,11 @@ function getInetCards() {
     //$card['qty'] = $qty;
     $card['status'] = getInetCardStatus($json['qty']['00'], $qty);
 
-
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+    
     $loc = $json['qty']['00'];
     $restockDate = array_key_exists('restockDate', $loc) ? $loc['restockDate'] : '';
     $restockDate = str_ireplace("T00:00:00", "", $restockDate);

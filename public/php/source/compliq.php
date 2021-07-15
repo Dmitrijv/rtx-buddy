@@ -54,6 +54,11 @@ function getCompliqCards() {
       $card['status'] == ProductStatus::Incoming;
     }
 
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     // do a sanity check on restock date
     if ( $card['status'] == ProductStatus::Incoming ) {
       

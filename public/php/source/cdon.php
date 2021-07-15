@@ -34,6 +34,11 @@ function getCdonCards() {
     $card['price'] = $a->getAttribute('data-product-price');
     $card['status'] = $a->getAttribute('data-p-state') == "Buyable" ? ProductStatus::InStock : ProductStatus::Na;
 
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     $card['restockDays'] = '';
     $card['restockDate'] = '';
     

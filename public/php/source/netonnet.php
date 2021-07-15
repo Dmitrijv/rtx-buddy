@@ -47,6 +47,11 @@ function getNetonnetCards() {
     $statusDiv =  $listItem->find('div.warehouseStockStatusContainer', 0);
     $card['status'] = getNetonnetStatus($statusDiv);
 
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     // do a sanity check on restock date
     if ( $card['status'] == ProductStatus::Incoming ) {
       $productPage = file_get_html($card['url'], false, $context);

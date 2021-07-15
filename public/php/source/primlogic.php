@@ -33,6 +33,12 @@ function getPrimlogicCards() {
     $card['url'] = "https://www.primlogic.se/produkter/". $id;
 
     $card['status'] = getPrimlogicCardStatus($json);
+
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     $card['price'] = $json['Realutpris'];
 
     $restockDate = $card['status'] == ProductStatus::Incoming ? $json['Leveransdatum'] : '';

@@ -47,6 +47,11 @@ function getRdebutikCards() {
     $status = $status['couriers_tab_content'];
     $card['status'] = str_contains($status, 'Beställ nu') ? ProductStatus::InStock : ProductStatus::SoldOut;
 
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     $price = $listItem->find('.product_price_wo_discount_listing', 0)->plaintext;
 
     preg_match_all('/(\d+)\.00/m', $price, $matches, PREG_SET_ORDER, 0);
