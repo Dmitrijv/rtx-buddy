@@ -15,6 +15,7 @@ require_once __DIR__ . '/source/netonnet.php';
 require_once __DIR__ . '/source/pricerunner.php';
 require_once __DIR__ . '/source/webhallen.php';
 require_once __DIR__ . '/source/rdebutik.php';
+require_once __DIR__ . '/source/komplett.php';
 
 $inetCards = getInetCards();
 $prisjaktCards = []; // getPrisjaktCards();
@@ -25,6 +26,7 @@ $netonnetCards = getNetonnetCards();
 $pricerunnerCards = getPricerunnerCards();
 $webhallenCards = getWebhallenCards();
 $rdebutikCards = getRdebutikCards();
+$komplettCards = getKomplettCards();
 
 $cards = array_merge(
   $inetCards,
@@ -35,7 +37,8 @@ $cards = array_merge(
   $netonnetCards,
   $pricerunnerCards,
   $webhallenCards,
-  $rdebutikCards
+  $rdebutikCards,
+  $komplettCards
 );
 
 $cards = array_filter($cards, "isRequested");
