@@ -15,6 +15,7 @@ require_once __DIR__ . '/source/pricerunner.php';
 require_once __DIR__ . '/source/webhallen.php';
 require_once __DIR__ . '/source/rdebutik.php';
 require_once __DIR__ . '/source/komplett.php';
+require_once __DIR__ . '/source/elgiganten.php';
 
 $inetCards = getInetCards();
 $primlogicCards = getPrimlogicCards();
@@ -25,6 +26,7 @@ $pricerunnerCards = getPricerunnerCards();
 $webhallenCards = getWebhallenCards();
 $rdebutikCards = getRdebutikCards();
 $komplettCards = getKomplettCards();
+$elgigantenCards = getElgigantenCards();
 
 $cards = array_merge(
   $inetCards,
@@ -35,7 +37,8 @@ $cards = array_merge(
   $pricerunnerCards,
   $webhallenCards,
   $rdebutikCards,
-  $komplettCards
+  $komplettCards,
+  $elgigantenCards
 );
 
 $cards = array_filter(

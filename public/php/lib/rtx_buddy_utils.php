@@ -131,6 +131,12 @@ function cleanCardName($name) {
   $name = str_ireplace("  ", " ", $name);
   $name = str_ireplace(",", " ", $name);
   $name = str_ends_with($name, ' Ti') ? substr($name, 0, -3) : $name;
+  
+  // elgiganten
+  $name = str_ireplace(" Triple Fan", " ", $name);
+  $name = str_ireplace(" RTX™ 3080", " ", $name);
+  $name = str_ireplace(" ™", " ", $name);
+  
 
   $name = implode(' ',array_unique(explode(' ', $name)));
 
@@ -141,6 +147,9 @@ function compareCards($a, $b) {
 
   // if both cards are in stock (whether stock is known or not) sort by price
   if ($a['status'] <= ProductStatus::InStock && $b['status'] <= ProductStatus::InStock) {
+    if ($a['price'] == $b['price']) {
+      return $a['name'] > $b['name'] ? 1 : -1;
+    }
     return $a['price'] > $b['price'] ? 1 : -1;
   }
 
