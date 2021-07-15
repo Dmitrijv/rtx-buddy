@@ -41,7 +41,12 @@ $cards = array_merge(
   $komplettCards
 );
 
-$cards = array_filter($cards, "isRequested");
+$cards = array_filter(
+  $cards, 
+  function ($card) {
+    return $card['status'] <= ProductStatus::Incoming;
+  }
+);
 
 // remove potential duplicates
 // foreach ($cards as $key => $card) {
@@ -59,15 +64,3 @@ usort($cards, "compareCards");
 echo json_encode($cards);
 
 die;
-
-abstract class RequestType {
-  const InStockOnly = 0;
-  const IncludeIncoming = 1;
-  const ShowAll = 2;
-}
-
-function isRequested($card) {
-  return $card['status'] <= ProductStatus::Incoming;
-}
-
-?>
