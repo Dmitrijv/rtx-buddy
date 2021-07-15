@@ -68,6 +68,7 @@ function getInetCards() {
     if ( $card['status'] == ProductStatus::Incoming && strtotime($restockDate) <= strtotime('now') ) {
       $card['status'] = ProductStatus::Delayed;
       $card['restockDays'] = '';
+      continue;
     } else { 
       $card['restockDays'] = strlen($restockDate) > 0 ? getDaysToDate($restockDate) : '';
     }
