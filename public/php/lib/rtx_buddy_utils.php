@@ -15,7 +15,7 @@ abstract class ProductStatus {
 
 
 function cleanCardName($name) {
-
+  
   $name = str_ireplace("TI", "Ti", $name);
   $name = str_ireplace("ti", "Ti", $name);
   $name = str_ireplace("RTX 3080Ti GAMING TRIO", "", $name);
@@ -23,6 +23,7 @@ function cleanCardName($name) {
 
   // Common
   $name = str_ireplace(" PCI-Express 4.0,", "", $name);
+  $name = str_ireplace("GeForce", "", $name);
   $name = str_ireplace("GeForce RTX 3080", "", $name);
   $name = str_ireplace(" RTX 3080", "", $name);
   $name = str_ireplace(" NVIDIA", "", $name);
