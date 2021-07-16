@@ -10,9 +10,10 @@ function getPrisjaktCards() {
   // Fetch current GraphQL version from the landing page.
   $prisjaktHtml = file_get_html('https://www.prisjakt.nu/')->save();
   $match = preg_match('/window\.RELEASE = "(.+)";.+window\.GRAPHQL_VERSION = "(.+)";/mU', $prisjaktHtml, $matches);
-  if ($match !== 1) { 
-    echo 'Could not fetch latest GraphQL version.';
-    die;
+
+  // could not fetch latest GraphQL version
+  if ($match !== 1) {
+    return [];
   }
 
   $GQLRelease = $matches[1];
@@ -53,9 +54,9 @@ function getPrisjaktCards() {
     if (empty($error)) {
       $prisjaktPriceNodeById[$key] = $response['data']['product']['prices']['nodes'];
     }
+    // request error
     else {
-      // die;
-      echo "The request $key return a error: $error" . "</br>";
+      return [];
     }
     curl_multi_remove_handle($mh, $chs[$key]);
   }
@@ -66,8 +67,6 @@ function getPrisjaktCards() {
   // build card list
   foreach($prisjaktJson as $key=>$json) {
     $id = $json['id'];
-
-    // $card['id'] = $id;
     
     $card['name'] = cleanCardName($json['name']);
     
@@ -88,7 +87,6 @@ function getPrisjaktCards() {
     $restockDate = str_ireplace("T00:00:00", "", $restockDate);
     $card['restockDate'] = $restockDate;
 
-
     // $qty = $card['status'] == ProductStatus::KnownStock ? $bestNode['stock']['statusText'] : '0';
     // $qty = str_ireplace(" st i lager", "", $qty);
     // $card['qty'] = (int)$qty;
@@ -102,8 +100,6 @@ function getPrisjaktCards() {
     }
 
     $card['source'] = "prisjakt";
-    // $card['store']['name'] = $bestNode['store']['name'];
-    // $card['store']['image'] = "https://pricespy-75b8.kxcdn.com/g/rfe/logos/logo_se_v2_light.svg";
 
     $cards[$id] = $card;
   }
