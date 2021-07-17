@@ -118,12 +118,15 @@ function getComputersalgCards() {
 
         $card['name'] = cleanCardName($name);
 
-        $href = $a->href;
-        $card['url'] = "https://www.computersalg.se". $href;
-
         $priceSpan = $listItem->find('div.productPrice span', 0);
         $price = $priceSpan->getAttribute('content');
         $card['price'] = (int) $price;
+        if ($card['price'] >= 22000) {
+          continue;
+        }
+
+        $href = $a->href;
+        $card['url'] = "https://www.computersalg.se". $href;
 
         $card['status'] = ProductStatus::InStock;
 
