@@ -10,7 +10,6 @@ require_once __DIR__ . '/source/inet.php';
 require_once __DIR__ . '/source/primlogic.php';
 require_once __DIR__ . '/source/compliq.php';
 require_once __DIR__ . '/source/netonnet.php';
-require_once __DIR__ . '/source/pricerunner.php';
 require_once __DIR__ . '/source/webhallen.php';
 require_once __DIR__ . '/source/rdebutik.php';
 require_once __DIR__ . '/source/komplett.php';
@@ -22,7 +21,6 @@ $inetCards = getInetCards();
 $primlogicCards = getPrimlogicCards();
 $compliqCards = getCompliqCards();
 $netonnetCards = getNetonnetCards();
-$pricerunnerCards = getPricerunnerCards();
 $webhallenCards = getWebhallenCards();
 $rdebutikCards = getRdebutikCards();
 $komplettCards = getKomplettCards();
@@ -35,7 +33,6 @@ $cards = array_merge(
   $primlogicCards,
   $compliqCards,
   $netonnetCards,
-  $pricerunnerCards,
   $webhallenCards,
   $rdebutikCards,
   $komplettCards,
