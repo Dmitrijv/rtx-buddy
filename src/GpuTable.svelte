@@ -7,6 +7,10 @@
     else if (status == 2) return "incoming";
     return "sold-out";
   }
+
+  function truncate(str, n) {
+    return str.length > n ? str.substr(0, n - 1) + "&hellip;" : str;
+  }
 </script>
 
 <!-- GPU Table -->
@@ -26,7 +30,7 @@
         <td>
           <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))}</span>
         </td>
-        <td class="name-cell"><a href={url}>{@html name.replace(" Ti ", "<strong> Ti </strong>")}</a></td>
+        <td><a href={url}>{@html truncate(name, 30).replace(" Ti ", "<strong> Ti </strong>")}</a></td>
         <td class="d-none d-sm-table-cell">{restockDate}</td>
         <td class="d-none d-sm-table-cell">{restockDays}</td>
         <td class="d-none d-sm-table-cell logo-cell">
@@ -51,11 +55,6 @@
 
   span {
     padding: 2px 4px;
-  }
-
-  .name-cell {
-    overflow: hidden;
-    white-space: nowrap;
   }
 
   .logo-cell {
