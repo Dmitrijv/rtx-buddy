@@ -15,6 +15,7 @@ require_once __DIR__ . '/source/webhallen.php';
 require_once __DIR__ . '/source/rdebutik.php';
 require_once __DIR__ . '/source/komplett.php';
 require_once __DIR__ . '/source/elgiganten.php';
+require_once __DIR__ . '/source/compumail.php';
 
 $inetCards = getInetCards();
 $primlogicCards = getPrimlogicCards();
@@ -25,6 +26,7 @@ $webhallenCards = getWebhallenCards();
 $rdebutikCards = getRdebutikCards();
 $komplettCards = getKomplettCards();
 $elgigantenCards = getElgigantenCards();
+$compuCards = getCompumailCards();
 
 $cards = array_merge(
   $inetCards,
@@ -35,7 +37,8 @@ $cards = array_merge(
   $webhallenCards,
   $rdebutikCards,
   $komplettCards,
-  $elgigantenCards
+  $elgigantenCards,
+  $compuCards
 );
 
 usort($cards, "compareCards");

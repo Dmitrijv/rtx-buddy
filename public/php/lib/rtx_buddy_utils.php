@@ -208,11 +208,14 @@ function getDateByDaysLeft($days) {
   return null;
 }
 
-function pp($input) {
+function pr($input) {
   echo '<pre>';
   print_r($input);
-  // var_dump($input);
   echo '</pre>';
+}
+
+function vd($input) {
+  var_dump($input);
 }
 
 ?>
