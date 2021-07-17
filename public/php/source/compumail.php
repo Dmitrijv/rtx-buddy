@@ -99,7 +99,7 @@ function getCompumailCards() {
 function getCompuPostString($cardIds) {
   $string = '';
   $lastIndex = sizeof($cardIds);
-  foreach ($cardIds as $index=>$id) {
+  foreach ($cardIds as $id) {
     $string = $string . 'products%5B%5D=' . $id . '&';
   }
   return $string;
