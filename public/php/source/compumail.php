@@ -67,8 +67,10 @@ function getCompumailCards() {
       $span = $statusHtml->find('ul.stockStatusOnProdPage span', 0);
       if (is_object($span)) {
         $card['status'] = ProductStatus::Incoming;
-        $card['restockDate'] = $span->getAttribute('data-delivery-date');
-        $card['restockDays'] = getDaysToDate($card['restockDate']);
+        $date = $span->getAttribute('data-delivery-date');
+        $fixedDate = date("Y-m-d", strtotime($date));
+        $card['restockDate'] = $fixedDate;
+        $card['restockDays'] = getDaysToDate($fixedDate);
       } else {
         continue;
       }
