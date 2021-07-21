@@ -21,7 +21,6 @@ function getComputersalgCards() {
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=13',
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=14',
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=15',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=16',
     ];
 
     $multi = curl_multi_init();
