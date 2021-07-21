@@ -28,9 +28,13 @@ function getCompliqCards() {
 
     $card['url'] = "https://shop.compliq.se" . $listItem->find('a.b-product-list__item-name', 0)->href;
 
-    $price = $listItem->find('div.b-price_small', 0)->plaintext;
-    //echo $price;
+    $price = $listItem->find('div.b-price_small', 0);
+    if (!is_object($price)) {
+      continue;
+    }
 
+    $price = $price->plaintext;
+    //echo $price;
     $price = str_ireplace(".", "", $price);
     $price = str_ireplace(":-", "", $price);
     $price = str_ireplace("inkl. moms", "", $price);
@@ -43,7 +47,12 @@ function getCompliqCards() {
     if (is_object($inStockIcon)) {
       $card['status'] = ProductStatus::InStock;
     } else {
-      $status = $listItem->find('span.b-show-stock__value', 1)->plaintext;
+      $status = $listItem->find('span.b-show-stock__value', 1);
+      if (!is_object($status)) {
+        continue;
+      }      
+
+      $status = $status->plaintext;
       $card['status'] = getCompliqStatus($status);
     }
 
