@@ -30,7 +30,7 @@
         <td>
           <span class={getClassByStatus(status)}>{new Intl.NumberFormat("en-IN").format(Math.floor(price))}</span>
         </td>
-        <td><a href={url}>{@html truncate(name, 30).replace(" Ti ", "<strong> Ti </strong>")}</a></td>
+        <td><a href={url}>{@html truncate(name, 25).replace("Ti", "<strong>Ti</strong>")}</a></td>
         <td class="d-none d-sm-table-cell">{restockDate}</td>
         <td class="d-none d-sm-table-cell">{restockDays}</td>
         <td class="d-none d-sm-table-cell logo-cell">
