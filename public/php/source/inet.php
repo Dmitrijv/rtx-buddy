@@ -22,6 +22,7 @@ function getInetCards() {
     '5411726', //EVGA GeForce RTX 3080 10GB XC3 ULTRA
     '5412243', //Gigabyte Geforce RTX 3080 10GB TURBO
     '5412080', //Gigabyte Geforce RTX 3080 10GB AORUS MASTER v2
+    '5412420', //MSI GeForce RTX 3080 10GB GAMING Z TRIO LHR
     // 3080 ti
     '5412319', //ASUS GeForce RTX 3080 Ti 12GB TUF GAMING OC
     '5412336', //MSI GeForce RTX 3080 Ti 12GB SUPRIM X
