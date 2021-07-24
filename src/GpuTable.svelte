@@ -21,7 +21,7 @@
       <th scope="col">Model</th>
       <th scope="col" class="d-none d-sm-table-cell">Restock</th>
       <th scope="col" class="d-none d-sm-table-cell">Days</th>
-      <th scope="col" class="d-none d-sm-table-cell">Source</th>
+      <th scope="col" class="d-none d-sm-table-cell">Store</th>
     </tr>
   </thead>
   <tbody class="inet-gpu-tbody">
