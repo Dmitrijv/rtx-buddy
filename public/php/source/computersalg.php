@@ -121,9 +121,7 @@ function getComputersalgCards() {
       $priceSpan = $listItem->find('div.productPrice span', 0);
       $price = $priceSpan->getAttribute('content');
       $card['price'] = (int) $price;
-      if ($card['price'] >= 22000) {
-        continue;
-      }
+      // if ($card['price'] >= 22000) { continue; }
 
       $href = $a->href;
       $card['url'] = "https://www.computersalg.se". $href;

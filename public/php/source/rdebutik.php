@@ -68,9 +68,7 @@ function getRdebutikCards() {
 
     preg_match_all('/(\d+)\.00/m', $price, $matches, PREG_SET_ORDER, 0);
     $card['price'] = (int) $matches[0][1];
-    if ($card['price'] >= 22000) {
-      continue;
-    }
+    // if ($card['price'] >= 22000) { continue; }
 
     $card['restockDays'] = '';
     $card['restockDate'] = '';
