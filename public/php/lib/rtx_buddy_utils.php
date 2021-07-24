@@ -104,6 +104,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
   $name = str_ireplace(" 3x", "", $name);
+  $name = str_ireplace(" 1x", "", $name);
   $name = str_ireplace(" 2.0", "", $name);
   $name = str_ireplace(" P", "", $name);
   $name = str_ireplace(" -", "", $name);
@@ -138,6 +139,12 @@ function cleanCardName($name) {
   $name = str_ireplace(" RTX™ 3080", " ", $name);
   $name = str_ireplace(" ™", " ", $name);
   
+  // Datagrottan
+  $name = str_ireplace(" 1770/19000", " ", $name);  
+  $name = str_ireplace(" 384-bit", " ", $name);  
+  $name = str_ireplace(" 1710MHz", " ", $name);  
+  $name = str_ireplace(" boost", " ", $name);  
+
   // Salg
   $name = str_ireplace(" MASTER (rev. 3.0) 7680 x 4320ixels", "", $name);
   $name = str_ireplace("GAMING Gaming ", "Gaming ", $name);
