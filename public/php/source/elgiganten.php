@@ -15,15 +15,15 @@ function getElgigantenCards() {
   
   $context = stream_context_create(
     array(
-        "http" => array(
-            'method'=>"GET",
-            "header" => "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36\r\n" .
-                        "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n" .
-                        "accept-language: en-US,en;q=0.9\r\n" .
-                        "accept-encoding: compress,\r\n" .
-                        "sec-fetch-dest: document\r\n"
-                        )
-          )
+      "http" => array(
+        'method'=>"GET",
+        "header" => "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36\r\n" .
+                    "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n" .
+                    "accept-language: en-US,en;q=0.9\r\n" .
+                    "accept-encoding: compress,\r\n" .
+                    "sec-fetch-dest: document\r\n"
+                    )
+        )
   );
 
   $searchUrl = 'https://www.elgiganten.se/search?SearchParameter=%26%40QueryTerm%3Drtx%2B3080%26bitem%3D0%26CategoryNameLevel2%3DDatorer%2B%2526%2BTillbeh%25C3%25B6r%2B__%2BDatorkomponenter%26online%3D1%26%40Sort.ProductListPrice%3D0%26%40Sort.name%3D0&PageSize=12&ProductElementCount=13&ContentElementCount=0&StoreElementCount=0&searchResultTab=Products&SearchTerm=rtx+3080&NumberRanges=';
