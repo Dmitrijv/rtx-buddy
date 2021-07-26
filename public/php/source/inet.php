@@ -42,7 +42,6 @@ function getInetCards() {
   foreach($inetJson as $key=>$json) {
 
     $id = $json['id'];
-    // $card['id'] = $id;
 
     $card['url'] = "https://www.inet.se/produkt/". $id ."/". $json['urlName'];
     $card['price'] =  array_key_exists('price', $json) ? $json['price']['price'] : 0;
@@ -56,7 +55,6 @@ function getInetCards() {
     $card['name'] = cleanCardName($name);
     
     $qty = getInetCardStock($json);
-    //$card['qty'] = $qty;
     $card['status'] = getInetCardStatus($json['qty']['00'], $qty);
 
     // Skip cards that are not in stock or have an incoming date
@@ -81,14 +79,10 @@ function getInetCards() {
     $card['restockDays'] = $card['restockDays'] == 0 ? '' : $card['restockDays'];
 
     $card['source'] = "inet";
-
-    // $card['store']['name'] = "Inet";
-    // $card['store']['image'] = "https://inetimg2.se/img/logo/inet-logo-rgb-pos-new.svg";
     
     $cards[$id] = $card;
   }
 
-  // pp(json_encode($cards));
   return $cards;
 
 }
