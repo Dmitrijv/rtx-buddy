@@ -9,6 +9,7 @@ function getRdebutikCards() {
   $blacklist = [];
   $blacklist['174290'] = true;
   $blacklist['174278'] = true;
+  $blacklist['179141'] = true; // Gigabyte GeForce RTX 3080 Ti Xtreme WaterForce 12GB GDDR6X 384bit grafikkort
 
   $cards = [];
 

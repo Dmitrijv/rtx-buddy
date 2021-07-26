@@ -7,6 +7,7 @@ function getKomplettCards() {
 
   $blacklist = [];
   $blacklist[1187638] = true;
+  $blacklist[1191133] = true; // MSI GeForce RTX 3080 SEA HAWK X 10G LHR
 
   $cards = [];
   
