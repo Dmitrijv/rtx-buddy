@@ -2,8 +2,7 @@
   export let cardList = [];
 
   function getClassByStatus(status) {
-    if (status == 0) return "in-stock";
-    else if (status == 1) return "in-stock";
+    if (status <= 1) return "in-stock";
     else if (status == 2) return "incoming";
     return "sold-out";
   }
