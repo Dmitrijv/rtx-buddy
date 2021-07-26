@@ -96,6 +96,10 @@ function getComputersalgCards() {
     foreach($html->find('ul.productlist li.productlist-item') as $index=>$listItem) {
 
       $a = $listItem->find('a.productNameLink', 0);
+      if (!is_object($a)) {
+          continue;
+      }
+
       $id = $a->getAttribute('data-toitemid');
       if (array_key_exists($id, $blacklist) == true) {
         continue;
