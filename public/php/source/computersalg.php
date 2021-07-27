@@ -84,6 +84,7 @@ function getComputersalgCards() {
   $blacklist[7466818] = true; // 3080 Waterforce
   $blacklist[6813126] = true; // 3080 Waterforce
   $blacklist[7373217] = true; // 3080 Hybrid
+  $blacklist[7471344] = true; // 3080 Sea Hawk
   $blacklist[7341368] = true; // 3090
 
   $cards = [];
