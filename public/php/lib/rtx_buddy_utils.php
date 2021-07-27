@@ -25,6 +25,7 @@ function cleanCardName($name) {
   $name = str_ireplace("|GIGABYTE|NVIDIA Ti|12 GB|384 bit|PCIE 4.0 16x|GDDR6X|Memory 19000 MHz|GPU 1710 MHz|Triple slot Fansink|2xHDMI|3xDisplayPort|GV-N308TGAMINGOC-12GD	", " Ti", $name);
 
   // Common
+  $name = str_ireplace(" (rev. 2.0), ", "", $name);
   $name = str_ireplace(" PCI-Express 4.0,", "", $name);
   $name = str_ireplace("GeForce", "", $name);
   $name = str_ireplace("GeForce RTX 3080", "", $name);
