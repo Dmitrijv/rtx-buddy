@@ -17,11 +17,11 @@ function getRdebutikCards() {
 
   try {
     $html = file_get_html("https://rdebutik.se/search_result/se/word/rtx+3080/page/1");
+    if($html === FALSE) { return []; }
   } catch (Exception $e) {
     return [];
   }
 
-  if($html === FALSE) { return []; }
 
   foreach($html->find('div.product_box_div') as $listItem) {
     
