@@ -20,6 +20,7 @@ function cleanCardName($name) {
   $name = str_ireplace("ti", "Ti", $name);
   $name = str_ireplace(" ()", "", $name);
 
+  $name = str_ireplace(" Premium Pack", "", $name);
   $name = str_ireplace("RTX 3080Ti GAMING TRIO", "", $name);
   $name = str_ireplace("|GIGABYTE|NVIDIA Ti|12 GB|384 bit|PCIE 4.0 16x|GDDR6X|Memory 19000 MHz|GPU 1710 MHz|Triple slot Fansink|2xHDMI|3xDisplayPort|GV-N308TGAMINGOC-12GD	", " Ti", $name);
 
