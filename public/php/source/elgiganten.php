@@ -36,7 +36,11 @@ function getElgigantenCards() {
     $url = $a->href;
 
     preg_match('/\/grafikkort\/(.*)\//mU', $url, $matches);
-    $id = $matches[1];
+    if (array_key_exists(1, $matches) == false) {
+      continue;
+    }
+
+    $id = $matches[1];    
 
     if (array_key_exists($id, $blacklist) == true) {
       continue;
