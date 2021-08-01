@@ -160,7 +160,7 @@ function cleanCardName($name) {
 
   $name = implode(' ',array_unique(explode(' ', $name)));
 
-  return $name;
+  return strlen($name) > 0 ? $name : 'Generic';
 }
 
 function compareCards($a, $b) {

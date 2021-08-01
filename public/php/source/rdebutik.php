@@ -45,9 +45,6 @@ function getRdebutikCards() {
 
     $name = $a->getAttribute('title');
     $name = cleanCardName($name);
-    if (strlen($name) == 0) {
-      $name = "Generic";
-    }
     $card['name'] = $name;
 
     $statusEndpoint = 'https://rdebutik.se/o_ajax_get_product_availability_couriers_list.php?product_id='.$id.'&lang=se';
