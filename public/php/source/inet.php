@@ -39,6 +39,10 @@ function getInetCards() {
   $cards = [];
 
   $inetJson = getJsonFromApi('https://www.inet.se/api/products', $inetCardIds);
+  if (!is_iterable($inetJson)) {
+    return [];
+  }
+
   foreach($inetJson as $key=>$json) {
 
     $id = $json['id'];
