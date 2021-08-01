@@ -78,6 +78,7 @@ function getComputersalgCards() {
   $blacklist[7383417] = true; // 3070 Ti
   $blacklist[7384457] = true; // 3070 Ti
   $blacklist[7383056] = true; // 3070 Ti
+  $blacklist[7384456] = true; // 3070 Ti
   $blacklist[7466819] = true; // 3080 Waterforce
   $blacklist[7461632] = true; // 3080 Waterforce
   $blacklist[7261641] = true; // 3080 Waterforce
