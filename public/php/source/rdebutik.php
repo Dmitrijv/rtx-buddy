@@ -17,7 +17,7 @@ function getRdebutikCards() {
 
   try {
     $html = file_get_html("https://rdebutik.se/search_result/se/word/rtx+3080/page/1");
-    if($html === FALSE) { return []; }
+    if($html === false) { return []; }
   } catch (Exception $e) {
     return [];
   }
