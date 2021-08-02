@@ -16,9 +16,10 @@ function getPrimlogicCards() {
 
   $endpoint = "https://api.primlogic.se/products?search=rtx%203080&cat_ids=630&in_stock=0&page=1&limit=240&sort_by=Leveransdatum&descending=0&get_score=1&get_product_ids=1";
   $res = getJsonFromApi($endpoint);
+  if ( !is_object($res) && !is_array($res) ) { return []; }
+  
   $cardJson = $res['docs'];
-  if ( !is_object($cardJson) && !is_array($cardJson) ) { return []; }
-
+  
   foreach($cardJson as $key=>$json) {
 
     $id = $json['Produktnr'];
