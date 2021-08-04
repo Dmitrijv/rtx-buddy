@@ -12,16 +12,16 @@ function getComputersalgCards() {
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=4',
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=5',
     'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=6',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=7',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=8',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=9',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=10',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=11',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=12',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=13',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=14',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=15',
-    'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=16',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=7',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=8',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=9',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=10',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=11',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=12',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=13',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=14',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=15',
+    // 'https://www.computersalg.se/l/5444/alla-grafikkort?csstock=0&f=40439e8c-d257-411a-8b77-82112a409e61&sq=rtx%203080&p=16',
   ];
 
   $multi = curl_multi_init();
@@ -69,11 +69,13 @@ function getComputersalgCards() {
   curl_multi_close($multi);
 
   $blacklist = [];
+  $blacklist[7371884] = true; // 2080 Ti
   $blacklist[7000620] = true; // Gamebox
   $blacklist[7353786] = true; // 3060
   $blacklist[7438330] = true; // 3060
   $blacklist[7438335] = true; // 3060
   $blacklist[7376745] = true; // 3060 Ti
+  $blacklist[7353800] = true; // 3070
   $blacklist[7373227] = true; // 3070 Ti
   $blacklist[7383417] = true; // 3070 Ti
   $blacklist[7384457] = true; // 3070 Ti
