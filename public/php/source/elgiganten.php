@@ -27,8 +27,15 @@ function getElgigantenCards() {
   );
 
   $searchUrl = 'https://www.elgiganten.se/search?SearchParameter=%26%40QueryTerm%3Drtx%2B3080%26bitem%3D0%26CategoryNameLevel2%3DDatorer%2B%2526%2BTillbeh%25C3%25B6r%2B__%2BDatorkomponenter%26online%3D1%26%40Sort.ProductListPrice%3D0%26%40Sort.name%3D0&PageSize=12&ProductElementCount=13&ContentElementCount=0&StoreElementCount=0&searchResultTab=Products&SearchTerm=rtx+3080&NumberRanges=';
-  $html = file_get_html($searchUrl, false, $context);
-  
+
+  $html = false;
+  try {
+    $html = file_get_html($searchUrl, false, $context);
+    if($html === false) { return []; }
+  } catch (Exception $e) {
+    return [];
+  }
+
   foreach($html->find('div.col-mini-product') as $listItem) {
 
     $a = $listItem->find('a.product-image-link', 0);
