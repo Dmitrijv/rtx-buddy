@@ -85,6 +85,7 @@ function getCompumailCards() {
     $card['name'] = cleanCardName($name);
 
     $price = $listItem->find('span.price',0)->getAttribute('data-price');
+    if (!is_object($price)) { continue; }
     $card['price'] = (int) $price;
     
     $card['source'] = "compumail";
