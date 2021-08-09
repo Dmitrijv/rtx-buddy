@@ -30,6 +30,7 @@ function cleanCardName($name) {
   $name = str_ireplace("GeForce", "", $name);
   $name = str_ireplace("GeForce RTX 3080", "", $name);
   $name = str_ireplace(" RTX 3080", "", $name);
+  $name = str_ireplace("RTX 3080 ", "", $name);
   $name = str_ireplace(" NVIDIA", "", $name);
   $name = str_ireplace(" 10 GB", "", $name);
   $name = str_ireplace(" 12 GB", "", $name);
@@ -87,6 +88,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" DP", "", $name);
   $name = str_ireplace(" - GF", "", $name);
   $name = str_ireplace(" x16", "", $name);
+  $name = str_ireplace(" 1440/1710MHz", "", $name);
   $name = str_ireplace(" graphics card", "", $name);
   $name = str_ireplace("-RTX3080-O10G-WHITE -", "", $name);
   $name = str_ireplace("-RTX3080", " ", $name);
@@ -99,16 +101,18 @@ function cleanCardName($name) {
   $name = str_ireplace(" RTX3080", "", $name); // ASUS VGA Asus ROG Strix
   $name = str_ireplace(" 1.4", "", $name); // ASUS VGA Asus ROG Strix
   $name = str_ireplace(" O10G V2-GAMING 2", "", $name);
+  $name = str_ireplace(" 320-bit", "", $name); // ASUS VGA Asus ROG Strix
 
   $name = str_ireplace(" White V2", "", $name);
   $name = str_ireplace(" EPIC-X GAMING EdiTion", "", $name);
+  $name = str_ireplace(" GAMING EdiTion", "", $name);
   $name = str_ireplace(" vit", "", $name);
   $name = str_ireplace(" 2 x", "", $name);
   $name = str_ireplace(" 3 x", "", $name);
   $name = str_ireplace(" 3x", "", $name);
   $name = str_ireplace(" 1x", "", $name);
   $name = str_ireplace(" 2.0", "", $name);
-  $name = str_ireplace(" P", "", $name);
+  //$name = str_ireplace(" P", "", $name);
   $name = str_ireplace(" -", "", $name);
 
   $name = str_ireplace(" RTX3080Ti", "", $name);
@@ -149,9 +153,12 @@ function cleanCardName($name) {
 
   // Salg
   $name = str_ireplace(" MASTER (rev. 3.0) 7680 x 4320ixels", "", $name);
-  $name = str_ireplace("GAMING Gaming ", "Gaming ", $name);
+  $name = str_ireplace("GAMING Gaming", "Gaming", $name);
+  $name = str_ireplace("Gaming GAMING", "Gaming", $name);
   $name = str_ireplace("ZOTAC GAMING ", "Zotac ", $name);
+  $name = str_ireplace("10GB ", "", $name);
   $name = str_ireplace(" BULK/HDMI", " ", $name);
+  $name = str_ireplace(" 3 fläkt/-ar", "", $name);
   $name = str_ireplace(" /", " ", $name);
   $name = str_ireplace(" ®", " ", $name);
   $name = str_ireplace("®", " ", $name);
