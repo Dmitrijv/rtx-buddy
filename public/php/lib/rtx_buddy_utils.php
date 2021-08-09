@@ -155,6 +155,8 @@ function cleanCardName($name) {
   $name = str_ireplace(" /", " ", $name);
   $name = str_ireplace(" ®", " ", $name);
   $name = str_ireplace("®", " ", $name);
+
+  $name = str_ireplace("( )", "", $name);
   
   $name = str_ireplace("  ", " ", $name);
 
