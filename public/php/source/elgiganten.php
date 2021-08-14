@@ -13,28 +13,39 @@ function getElgigantenCards() {
 
   $cards = [];
   
-  $context = stream_context_create(
-    array(
-      "http" => array(
-        'method'=>"GET",
-        "header" => "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36\r\n" .
-                    "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n" .
-                    "accept-language: en-US,en;q=0.9\r\n" .
-                    "accept-encoding: compress,\r\n" .
-                    "sec-fetch-dest: document\r\n"
-                    )
-        )
-  );
+  $url = 'https://www.elgiganten.se/search?SearchParameter=%26%40QueryTerm%3Drtx%2B3080%26bitem%3D0%26CategoryNameLevel2%3DDatorer%2B%2526%2BTillbeh%25C3%25B6r%2B__%2BDatorkomponenter%26online%3D1%26%40Sort.ProductListPrice%3D0%26%40Sort.name%3D0&PageSize=12&ProductElementCount=13&ContentElementCount=0&StoreElementCount=0&searchResultTab=Products&SearchTerm=rtx+3080&NumberRanges=';
 
-  $searchUrl = 'https://www.elgiganten.se/search?SearchParameter=%26%40QueryTerm%3Drtx%2B3080%26bitem%3D0%26CategoryNameLevel2%3DDatorer%2B%2526%2BTillbeh%25C3%25B6r%2B__%2BDatorkomponenter%26online%3D1%26%40Sort.ProductListPrice%3D0%26%40Sort.name%3D0&PageSize=12&ProductElementCount=13&ContentElementCount=0&StoreElementCount=0&searchResultTab=Products&SearchTerm=rtx+3080&NumberRanges=';
+  $handle = curl_init();
+  curl_setopt($handle, CURLOPT_URL, $url);
+  curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "GET");
+  curl_setopt($handle, CURLINFO_HEADER_OUT, true);
+  curl_setopt($handle, CURLOPT_REFERER, $url);
+  curl_setopt($handle, CURLOPT_HTTPHEADER, array(
+    "Upgrade-Insecure-Requests: 1",
+    'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'Accept-Encoding: br',
+    'Origin: '. $url,
+    'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36',
+    "Cache-Control" => "no-cache",
+  ));
 
-  $html = false;
-  try {
-    $html = file_get_html($searchUrl, false, $context);
-    if($html === false) { return []; }
-  } catch (Exception $e) {
-    return [];
-  }
+  curl_setopt($handle, CURLOPT_COOKIESESSION, true);
+  curl_setopt($handle, CURLOPT_COOKIEJAR, __DIR__ . '/cookies/elgiganten-cookies.txt');
+  curl_setopt($handle, CURLOPT_COOKIEFILE, __DIR__ . '/cookies/elgiganten-cookies.txt');
+
+  curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
+  curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);  
+  curl_setopt($handle, CURLOPT_VERBOSE, true);
+
+  $htmlString = curl_exec($handle);
+  curl_close($handle);
+
+  $html = new simple_html_dom();
+  $html->load($htmlString);
+
+  if($html === false) { return []; }
 
   foreach($html->find('div.col-mini-product') as $listItem) {
 

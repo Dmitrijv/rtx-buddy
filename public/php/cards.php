@@ -28,7 +28,7 @@ $komplettCards = getKomplettCards();
 $elgigantenCards = getElgigantenCards();
 $compuCards = getCompumailCards();
 $salgCards = getComputersalgCards();
-$grottanCards = getDatagrottanCards();
+$grottanCards = getDatagrottanCards(); 
 
 $cards = array_merge(
   $inetCards,
