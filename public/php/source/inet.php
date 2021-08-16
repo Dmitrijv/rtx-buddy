@@ -35,6 +35,7 @@ function getInetCards() {
     '5412320', //ASUS GeForce RTX 3080 Ti 12GB STRIX GAMING OC
     '5412318', //ASUS GeForce RTX 3080 Ti 12GB TUF GAMING
     '5412369', //EVGA GeForce RTX 3080 Ti 12GB FTW3 ULTRA
+    '5412421', //MSI GeForce RTX 3080 Ti 12GB VENTUS 3X OC
   );
 
   $cards = [];
