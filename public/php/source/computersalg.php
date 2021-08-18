@@ -69,7 +69,7 @@ function getComputersalgCards() {
       }
 
       $id = $a->getAttribute('data-toitemid');
-      if (array_key_exists($id, $blacklist) == true) {
+      if (array_key_exists($id, $blacklist) == true || array_key_exists($id, $cards) == true) {
         continue;
       }
 
