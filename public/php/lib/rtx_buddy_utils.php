@@ -28,10 +28,7 @@ function cleanCardName($name) {
   $name = str_ireplace(" (rev. 2.0), ", "", $name);
   $name = str_ireplace(" PCI-Express 4.0,", "", $name);
   $name = str_ireplace("GeForce", "", $name);
-  $name = str_ireplace(" RTX 3080", "", $name);
   $name = str_ireplace("GeForce RTX 3080", "", $name);
-  $name = str_ireplace(" RTX 3080", "", $name);
-  $name = str_ireplace("RTX 3080 ", "", $name);
   $name = str_ireplace(" NVIDIA", "", $name);
   $name = str_ireplace(" 10 GB", "", $name);
   $name = str_ireplace(" 12 GB", "", $name);
@@ -138,19 +135,19 @@ function cleanCardName($name) {
   $name = str_ireplace(" (1-Click OC)", " ", $name);
   $name = str_ireplace(" 1-Click OC", " ", $name);
   $name = str_ireplace(" 1-click OC", " ", $name);
-  $name = str_ireplace(",", " ", $name);
+  $name = str_ireplace(",", "", $name);
   $name = str_ends_with($name, ' Ti') ? substr($name, 0, -3) : $name;
   
   // elgiganten
-  $name = str_ireplace(" Triple Fan", " ", $name);
-  $name = str_ireplace(" RTX™ 3080", " ", $name);
-  $name = str_ireplace(" ™", " ", $name);
+  $name = str_ireplace(" Triple Fan", "", $name);
+  $name = str_ireplace(" RTX™ 3080", "", $name);
+  $name = str_ireplace(" ™", "", $name);
   
   // Datagrottan
-  $name = str_ireplace(" 1770/19000", " ", $name);  
-  $name = str_ireplace(" 384-bit", " ", $name);  
-  $name = str_ireplace(" 1710MHz", " ", $name);  
-  $name = str_ireplace(" boost", " ", $name);  
+  $name = str_ireplace(" 1770/19000", "", $name);  
+  $name = str_ireplace(" 384-bit", "", $name);  
+  $name = str_ireplace(" 1710MHz", "", $name);  
+  $name = str_ireplace(" boost", "", $name);  
 
   // Salg
   $name = str_ireplace(" MASTER (rev. 3.0) 7680 x 4320ixels", "", $name);
@@ -158,15 +155,35 @@ function cleanCardName($name) {
   $name = str_ireplace("Gaming GAMING", "Gaming", $name);
   $name = str_ireplace("ZOTAC GAMING ", "Zotac ", $name);
   $name = str_ireplace("10GB ", "", $name);
-  $name = str_ireplace(" BULK/HDMI", " ", $name);
+  $name = str_ireplace(" BULK/HDMI", "", $name);
   $name = str_ireplace(" 3 fläkt/-ar", "", $name);
-  $name = str_ireplace(" /", " ", $name);
-  $name = str_ireplace(" ®", " ", $name);
-  $name = str_ireplace("®", " ", $name);
+  $name = str_ireplace(" /", "", $name);
+  $name = str_ireplace(" ®", "", $name);
+  $name = str_ireplace("®", "", $name);
+  
+  // Multitech
+  $name = str_ireplace(" 1770/ 19000 HDCP", "", $name);
+  $name = str_ireplace(" 1440/", "", $name);
+  $name = str_ireplace(" (90YV0FB5-M0NM00)", "", $name);
+  $name = str_ireplace(" (90YV0FB4-M0NM00)", "", $name);
+  $name = str_ireplace(" with (90YV0GA1-M0NB00)", "", $name);
+  $name = str_ireplace(" (90YV0GU1-M0NM00)", "", $name);
+  $name = str_ireplace(" (90YV0FA7-M0NM00)", "", $name);
 
+  $name = str_ireplace(" RTX 3080", "", $name);
+  $name = str_ireplace("RTX 3080 ", "", $name);
+
+  $name = str_ireplace(" ( ) ", "", $name);
+  $name = str_ireplace("( ) ", "", $name);
+  $name = str_ireplace(" ( )", "", $name);
+  $name = str_ireplace(" ( OC)", "", $name);
+  $name = str_ireplace(" ( X)", "", $name);
   $name = str_ireplace("( )", "", $name);
+
   
   $name = str_ireplace("  ", " ", $name);
+
+
 
   $name = implode(' ',array_unique(explode(' ', $name)));
 

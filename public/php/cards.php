@@ -17,6 +17,7 @@ require_once __DIR__ . '/source/elgiganten.php';
 require_once __DIR__ . '/source/compumail.php';
 require_once __DIR__ . '/source/computersalg.php';
 require_once __DIR__ . '/source/datagrottan.php';
+require_once __DIR__ . '/source/multitech.php';
 
 $inetCards = getInetCards();
 $primlogicCards = getPrimlogicCards();
@@ -29,6 +30,7 @@ $elgigantenCards = getElgigantenCards();
 $compuCards = getCompumailCards();
 $salgCards = getComputersalgCards();
 $grottanCards = getDatagrottanCards(); 
+$multitechCards = getMultitechCards();
 
 $cards = array_merge(
   $inetCards,
@@ -41,7 +43,8 @@ $cards = array_merge(
   $elgigantenCards,
   $compuCards,
   $salgCards,
-  $grottanCards
+  $grottanCards,
+  $multitechCards
 );
 
 usort($cards, "compareCards");
