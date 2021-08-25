@@ -31,6 +31,7 @@ function getComputersalgCards() {
   $blacklist[7371884] = true; // 2080 Ti
   $blacklist[7000620] = true; // Gamebox
   $blacklist[7556809] = true; // Gamebox
+  $blacklist[7576916] = true; // Gamebox
   $blacklist[7353786] = true; // 3060
   $blacklist[7438330] = true; // 3060
   $blacklist[7438335] = true; // 3060
