@@ -33,6 +33,14 @@ function getNetonnetCards() {
       continue;
     }
 
+    $statusDiv =  $listItem->find('div.warehouseStockStatusContainer', 0);
+    $card['status'] = getNetonnetStatus($statusDiv);
+
+    // Skip cards that are not in stock or have an incoming date
+    if ($card['status'] > ProductStatus::Incoming) {
+      continue;
+    }
+
     $name = cleanCardName($name);
     $card['name'] = trim($name);
 
@@ -43,14 +51,6 @@ function getNetonnetCards() {
     $price = str_replace("\xA0", '', $price);
     $price = preg_replace("/[^0-9]/", "", $price);
     $card['price'] = intval($price);
-
-    $statusDiv =  $listItem->find('div.warehouseStockStatusContainer', 0);
-    $card['status'] = getNetonnetStatus($statusDiv);
-
-    // Skip cards that are not in stock or have an incoming date
-    if ($card['status'] > ProductStatus::Incoming) {
-      continue;
-    }
 
     // do a sanity check on restock date
     if ( $card['status'] == ProductStatus::Incoming ) {
@@ -78,9 +78,9 @@ function getNetonnetCards() {
 }
 
 function getNetonnetStatus($status) {
-  $inStockIcons = $status->find('span.stockStatusInStock');
+  $inStockIcons = $status->find('i.success');
   if ( count($inStockIcons) > 0 ) { return ProductStatus::InStock; }
-  $preorderIcons = $status->find('span.stockStatusPreOrder');
+  $preorderIcons = $status->find('i.warning');
   if ( count($preorderIcons) > 0 ) { return ProductStatus::Incoming; }
   return ProductStatus::SoldOut;
 }
