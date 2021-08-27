@@ -39,6 +39,7 @@ function getComputersalgCards() {
   $blacklist[7353798] = true; // 3060
   $blacklist[7353792] = true; // 3060 Ti
   $blacklist[7376745] = true; // 3060 Ti
+  $blacklist[7576979] = true; // 3060 Ti
   $blacklist[7353800] = true; // 3070
   $blacklist[7373227] = true; // 3070 Ti
   $blacklist[7383417] = true; // 3070 Ti

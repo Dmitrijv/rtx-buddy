@@ -8,6 +8,7 @@ function getDatagrottanCards() {
 
   $blacklist = [];
   $blacklist['1001573951'] = true;
+  $blacklist['1002025921'] = true; // ASUS ROG GC31S-030- ROG Flow X13 Docking Station RTX 3080
 
   $cards = [];
 

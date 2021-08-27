@@ -6,7 +6,8 @@ require_once __DIR__ . '/../lib/rtx_buddy_utils.php';
 function getCompliqCards() {
 
   $blacklist = [];
-  $blacklist[1001573951] = true;// GIGABYTE AORUS GAMING BOX
+  $blacklist[1001573951] = true; // GIGABYTE AORUS GAMING BOX
+  $blacklist[1002025921] = true; // ASUS ROG GC31S-030- ROG Flow X13 Docking Station RTX 3080
   
   $cards = [];
 
