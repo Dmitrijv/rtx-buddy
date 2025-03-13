@@ -9,6 +9,8 @@ function getWebhallenCards() {
   $blacklist = [];
 
   $cards = [];
+
+  return $cards;
   
   $webhallenJson = getJsonFromApi('https://www.webhallen.com/api/search/product?query%5BsortBy%5D=searchRating&query%5Bfilters%5D%5B0%5D%5Btype%5D=searchString&query%5Bfilters%5D%5B0%5D%5Bvalue%5D=rtx+3080&query%5Bfilters%5D%5B1%5D%5Btype%5D=stock&query%5Bfilters%5D%5B1%5D%5Bvalue%5D=1&query%5Bfilters%5D%5B2%5D%5Btype%5D=category&query%5Bfilters%5D%5B2%5D%5Bvalue%5D=47&query%5BminPrice%5D=0&query%5BmaxPrice%5D=999999&page=1');
   foreach($webhallenJson['products'] as $key=>$json) {

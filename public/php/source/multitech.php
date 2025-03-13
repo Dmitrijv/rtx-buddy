@@ -18,6 +18,8 @@ function getMultitechCards() {
 
   $cards = [];
 
+  return $cards;
+
   $html = file_get_html("https://webshop.multitech.se/multi/search/c_36132/ps_90?kw=rtx+3080");
   if($html === false) { return []; }
 
